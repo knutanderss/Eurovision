@@ -10,11 +10,21 @@ export default class App extends React.Component {
     }
   }
   
+  buttonClicked() {
+    fetch("http://192.168.0.198:3000/number")
+      .then((respons) => { 
+       respons.text().then((str) => this.setState({knappeting: str}))
+       });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text>Hei Knutegut!</Text>
-        <Button title={this.state.knappeting} onPress={() => {this.setState({knappeting: "har trykket"})}}/>
+        <Button title={this.state.knappeting} onPress={() => {
+          this.setState({knappeting: "har trykket"});
+          this.buttonClicked();
+          }}/>
       </View>
     );
   }

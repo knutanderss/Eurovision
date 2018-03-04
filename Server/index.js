@@ -38,8 +38,8 @@ app.get('/artists', (req, res) => {
 });
 
 app.post('/artists', (req, res) => {
-    console.log("Client inserts: " + req.body);
-    connectToDb((db) => db.collection('artists').insert({name: req.name, country: req.country}));
+    console.log("Client inserts artist: " + req.body.name + " country:" + req.body.country);
+    connectToDb((db) => db.collection('artists').insert({name: req.body.name, country: req.body.country}));
     sendBackArtists(res);
 });
 
