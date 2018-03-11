@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: white;
+  background: #2D2D2D;
+  font-size: 14px;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+}
+
+.sectionLeft {
+  padding: 80px;
+  flex: 1;
+  
+}
+
+.image {
+  height: 400px;
+  width: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+.sectionRight {
+  padding: 80px;
+  flex: 1;
+}
+
+.sectionRight input {
+  padding: 8px 8px;
+  border-radius: 4px;
+  width: 200px;
+  border: none;
+
+
+}
+
+.sectionRight select {
+  width: 216px;
+  padding: 8px;
+  border: none;
+  background: white;
+  border-radius: 4px;
+}
+
+.sectionRight button {
+  border-radius: 4px;
+  background: green;
+  border: none;
+  padding: 8px 24px;
+  margin-top: 24px;
+}
+
+.artistList {
+  display: flex;
+  flex-direction: column;
+}
+
+.listItem, .listLabels {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 16px 40px;
+
+}
+
+.listItem:hover {
+  background: slategray;
+}
+
+.listName {
+  flex: 1;
+}
+
+.listCountry {
+  flex: 1;
+}
+
+.listButtons {
+  flex: 1;
+  text-align: right;
+} 
+
+.listLabels {
+  color: slategray;
+}
