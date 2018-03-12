@@ -50,17 +50,20 @@ class App extends Component {
 
   selectCountry = (val) => {this.setState({country: val})}
 
+  onEnter = (e) => {if(e.key === 'Enter') {this.submitForm()}}
+
   render() {
+    var image = this.state.imageURL === '' ? 'http://darkroom.baltimoresun.com/wp-content/uploads/2014/05/REU-EUROVISION_.jpg' : this.state.imageURL;
     return (
       <div className="main">
         <div className="section">
         <div className="sectionLeft">
-          <div className="image" style={{backgroundImage: "url(" + this.state.imageURL + ")"}} />
+          <div className="image" style={{backgroundImage: "url(" +image + ")"}} />
         </div>
         <div className="sectionRight">
           <div className="artist">
             <p>Artist:</p>
-            <input type="text" placeholder="Ola Nordmann"  value={this.state.name} onChange={this.handleNameChange} />
+            <input type="text" placeholder="Ola Nordmann"  value={this.state.name} onKeyPress={this.onEnter} onChange={this.handleNameChange} />
           </div>
           <div className="country">
             <p>Land:</p>
@@ -68,27 +71,32 @@ class App extends Component {
           </div >
           <div className="imageURL">
             <p>Bilde URL:</p>
-            <input type="text" placeholder="www.minside.no/bilde.jpg"  value={this.state.imageURL} onChange={this.handleImageURLChange} />
+            <input type="text" 
+                   placeholder="www.minside.no/bilde.jpg"  
+                   value={this.state.imageURL} 
+                   onChange={this.handleImageURLChange}
+                   onKeyPress={this.onEnter} />
           </div> 
           <button onClick={this.submitForm}>Legg til</button>
           </div> 
         </div>
-          <ArtistList items={this.state.items}/>
+          <ArtistList items={this.state.items} updateList={() => this.getArtistsFromServer()}/>
       </div>
     );
   }
 }
 
 class ArtistList extends React.Component {
+  
   render () {
     var listitems = this.props.items.map((item) => {
       return (
-        <ArtistListItem key={item._id} item={item}   />
+        <ArtistListItem key={item._id} item={item} updateList={() => {this.props.updateList()}}   />
       );
     });
     return (
       <div>
-      <div className="listLabels"> 
+        <div className="listLabels"> 
           <div className="listName">Navn</div>
           <div className="listCountry">Land</div>
           <div className="listButtons"></div>
@@ -101,7 +109,15 @@ class ArtistList extends React.Component {
 
 class ArtistListItem extends React.Component {
   
-  onClickClose() {
+  onClickClose(removeName) {
+    fetch("http://127.0.0.1:3000/artists/delete", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({name: removeName}),
+    }).then(this.props.updateList())
+    .catch((err) => console.log(err.message));
   }
   onClickEdit() {
   }
@@ -112,8 +128,8 @@ class ArtistListItem extends React.Component {
           <div className="listName">{this.props.item.name} </div>
           <div className="listCountry">{this.props.item.country} </div>
           <div className="listButtons">
-            <button type="button" className="edit" onClick={this.onClickEdit}>Edit</button>
-            <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
+            <button type="button" className="edit" onClick={() => this.onClickEdit}>Edit</button>
+            <button type="button" className="close" onClick={() => this.onClickClose(this.props.item.name)}>&times;</button>
           </div>
         </div>
     );
