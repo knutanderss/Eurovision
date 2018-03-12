@@ -43,4 +43,12 @@ app.post('/artists', (req, res) => {
     sendBackArtists(res);
 });
 
+app.post('/artists/delete', (req, res) => {
+    const name = req.body.name;
+    console.log('Client tries to delete artist: ' + name);
+    connectToDb((db) => db.collection('artists').remove({name: name}));
+    console.log(name + ' deleted.');
+    sendBackArtists(res);
+})
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
