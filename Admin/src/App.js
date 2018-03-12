@@ -33,7 +33,7 @@ class App extends Component {
 
 
   submitForm = () => {
-    if(this.state.name == '' || this.state.country == '') {
+    if(this.state.name === '' || this.state.country === '') {
       alert("Vennligst fyll inn alle feltene!")
       return;
     }
