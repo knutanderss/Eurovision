@@ -10,7 +10,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -22,12 +23,24 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       url:"",
+       name: "",
+    }
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-       
+        <Image
+        style={{width: 100, height: 100}}
+        source={{uri: this.state.url}}
+        />
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome {this.state.name}!
         </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
@@ -52,6 +65,7 @@ export default class App extends Component<Props> {
                       if (error) {
                         alert("Error: " + error.toString());
                       } else {
+                        this.setState({url:result.picture.data.url, name: result.name});
                         alert("Success: " + JSON.stringify(result));
                       }
                     }
