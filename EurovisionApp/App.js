@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import { LoginButton, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import React, { Component } from 'react';
 import {
@@ -11,42 +5,53 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  StatusBar,
 } from 'react-native';
+import { StackNavigator } from 'react-navigation'; 
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+
 
 type Props = {};
 export default class App extends Component<Props> {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       url:"",
-       name: "",
-    }
+  render() {
+    return (
+      <RootStack />
+    );
   }
-  
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#D64541',
+  },
+  welcome: {
+    fontSize: 30,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 50,
+    margin: 10,
+  },
+});
+
+class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-        style={{width: 100, height: 100}}
-        source={{uri: this.state.url}}
-        />
+       <StatusBar hidden={true} />
         <Text style={styles.welcome}>
-          Welcome {this.state.name}!
+          Velkommen til Eurovisionfest!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
+          Du vil snart ha mulighet til å være med å stemme frem dine favoritter. Vi vil bare bli litt bedre kjent med deg først. 
+          Logg på med Facebook for å komme igang!
         </Text>
         <LoginButton 
           publishPermissions={["publish_actions"]}
@@ -65,6 +70,7 @@ export default class App extends Component<Props> {
                       if (error) {
                         alert("Error: " + error.toString());
                       } else {
+                        this.props.navigation.navigate('Details')
                         this.setState({url:result.picture.data.url, name: result.name});
                         alert("Success: " + JSON.stringify(result));
                       }
@@ -96,21 +102,26 @@ export default class App extends Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+class DetailsScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+
+const RootStack = StackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+    },
+    Details: {
+      screen: DetailsScreen,
+    },
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  {
+    initialRouteName: 'Home',
+  }
+);
