@@ -25,7 +25,4 @@ const RootStack = StackNavigator(
       screen: ListScreen,
     },
   },
-  {
-    initialRouteName: 'Login',
-  }
 );

@@ -28,21 +28,18 @@ export default class LoginScreen extends Component<Props> {
             onLoginFinished={
               (error, result) => {
                 if (error) {
-                  alert("Login failed with error: " + result.error);
+                  alert("Problemer ved innlogging, vennligst prøv igjen!");
                 } else if (result.isCancelled) {
                   alert("Login was cancelled");
                 } else {
                   AccessToken.getCurrentAccessToken().then(
                     (data) => {
                       let accessToken = data.accessToken;
-  
                       const responseInfoCallback = (error, result) => {
                         if (error) {
                           alert("Error: " + error.toString());
                         } else {
-                          this.props.navigation.navigate('List')
-                          this.setState({url:result.picture.data.url, name: result.name});
-                          alert("Success: " + JSON.stringify(result));
+                          this.props.navigation.navigate('List', {url:result.picture.data.url, name: result.name, token: result.token});
                         }
                       }
   
