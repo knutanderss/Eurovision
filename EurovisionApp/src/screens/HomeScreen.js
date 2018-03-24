@@ -71,10 +71,8 @@ class HomeScreen extends React.Component {
                     <DropdownMenu style={{
                         flex: 1
                     }} //TODO: WHEN NO ELEMENTS IN DROPDOWNMENT, DROPDOWN MENU DISSAPEAR
-                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => alert(data[selection][row])}>
-
+                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => this.setState({items: [{name:'Danier'}]})}>
                         {listitems}
-
                     </DropdownMenu>
                 </ View>
 
