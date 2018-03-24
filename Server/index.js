@@ -11,7 +11,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.text());
 
 connectToDb = (callback) => {
-    MongoClient.connect('mongodb://10.111.55.107/eurovision', function (err, client) {
+    MongoClient.connect('mongodb://localhost/eurovision', function (err, client) {
         if (err) throw err;
         var db = client.db('eurovision');
         callback(db);
@@ -38,8 +38,8 @@ app.get('/artists', (req, res) => {
 });
 
 app.post('/artists', (req, res) => {
-    console.log("Client inserts artist: " + req.body.name + " country:" + req.body.country + " imageURL: " + req.body.imageURL);
-    connectToDb((db) => db.collection('artists').insert({name: req.body.name, country: req.body.country, imageURL: req.body.imageURL}));
+    console.log("Client inserts artist: " + req.body.name + " country:" + req.body.country + " imageURL: " + req.body.imageURL + " number: " + req.body.number);
+    connectToDb((db) => db.collection('artists').insert({name: req.body.name, country: req.body.country, imageURL: req.body.imageURL, number: req.body.number}));
     sendBackArtists(res);
 });
 
