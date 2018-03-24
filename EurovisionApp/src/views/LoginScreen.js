@@ -20,7 +20,7 @@ export default class LoginScreen extends Component<Props> {
     sendAccountToServer(accessToken) {
         fetch(`http://192.168.0.198:3000/api/user/${accessToken}/userinfo`, {
       method: 'GET',
-    });
+    }).then(json => console.log(json.text()));
 }
     
     render() {
