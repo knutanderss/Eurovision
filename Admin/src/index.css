@@ -74,6 +74,10 @@ body {
   background: slategray;
 }
 
+.listNumber {
+  flex: 0.2;
+}
+
 .listName {
   flex: 1;
 }

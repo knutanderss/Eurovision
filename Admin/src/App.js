@@ -11,13 +11,14 @@ class App extends Component {
       imageURL: '',
       items: [], 
       id: '',
+      number: '',
     };
     this.getArtistsFromServer();
 
   }
 
   getArtistsFromServer() {
-    fetch("http://10.111.55.107:3000/artists", {
+    fetch("http://localhost:3000/artists", {
       method: 'GET'
     }).then((respons) => {respons.json().then((artistArr) => this.setState({items: artistArr}))})
     .catch((err) => console.log(err.message));
@@ -34,28 +35,33 @@ class App extends Component {
     this.setState({imageURL: e.target.value});
   }
 
-  setCurrentArtist = (newName, newCountry, newImageURL, newId) => {
+  handleNumberChange = (e) => {
+    this.setState({number: e.target.value});
+  }
+
+  setCurrentArtist = (newName, newCountry, newImageURL, newId, newNumber) => {
     this.setState({name: newName, 
                    country: newCountry, 
                    imageURL: newImageURL, 
-                   id: newId
+                   id: newId,
+                   number: newNumber,
                   });
   }
 
   submitForm = () => {
-    if(this.state.name === '' || this.state.country === '') {
+    if(this.state.name === '' || this.state.country === '' || this.state.number === '') {
       alert("Vennligst fyll inn alle feltene!")
       return;
     }
-    fetch("http://10.111.55.107:3000/artists", {
+    fetch("http://localhost:3000/artists", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({name: this.state.name, country: this.state.country, imageURL: this.state.imageURL}),
+      body: JSON.stringify({name: this.state.name, country: this.state.country, imageURL: this.state.imageURL, number: this.state.number}),
     }).then((respons) => {respons.json().then((artistArr) => this.setState({items: artistArr}));})
     .catch((err) => console.log(err.message));
-    this.setState({name: '', country: '', imageURL: ''})
+    this.setState({name: '', country: '', imageURL: '', number: ''})
   }
 
   selectCountry = (val) => {this.setState({country: val})}
@@ -73,7 +79,7 @@ class App extends Component {
         <div className="sectionRight">
           <div className="artist">
             <p>Artist:</p>
-            <input type="text" placeholder="Ola Nordmann"  value={this.state.name} maxlength="45" onKeyPress={this.onEnter} onChange={this.handleNameChange} />
+            <input type="text" placeholder="Ola Nordmann"  value={this.state.name} maxLength="45" onKeyPress={this.onEnter} onChange={this.handleNameChange} />
           </div>
           <div className="country">
             <p>Land:</p>
@@ -87,10 +93,18 @@ class App extends Component {
                    onChange={this.handleImageURLChange}
                    onKeyPress={this.onEnter} />
           </div> 
+          <div className="number">
+          <p>Nummer:</p>
+          <input type="text" 
+                   placeholder="1"  
+                   value={this.state.number} 
+                   onChange={this.handleNumberChange}
+                   onKeyPress={this.onEnter} />
+          </div>
           <button onClick={this.submitForm}>Legg til</button>
           </div> 
         </div>
-          <ArtistList items={this.state.items} updateList={(newArtists) => this.getArtistsFromServer(newArtists)} changeArtist={(newName, newCountry, newImageURL, newId) => this.setCurrentArtist(newName, newCountry, newImageURL, newId)}/>
+          <ArtistList items={this.state.items} updateList={(newArtists) => this.getArtistsFromServer(newArtists)} changeArtist={(newName, newCountry, newImageURL, newId, newNumber) => this.setCurrentArtist(newName, newCountry, newImageURL, newId, newNumber)}/>
       </div>
     );
   }
@@ -99,14 +113,15 @@ class App extends Component {
 class ArtistList extends React.Component {
   
   render () {
-    var listitems = this.props.items.map((item) => {
+    var listitems = this.props.items.sort((a,b) => parseInt(a.number) > parseInt(b.number)).map((item) => {
       return (
-        <ArtistListItem key={item._id} item={item} updateList={(newArtists) => {this.props.updateList(newArtists)}} changeArtist={(newName, newCountry, newImageURL, newId) =>{this.props.changeArtist(newName, newCountry, newImageURL, newId)}}   />
+        <ArtistListItem key={item._id} item={item} updateList={(newArtists) => {this.props.updateList(newArtists)}} changeArtist={(newName, newCountry, newImageURL, newId, newNumber) =>{this.props.changeArtist(newName, newCountry, newImageURL, newId, newNumber)}}   />
       );
     });
     return (
       <div>
         <div className="listLabels"> 
+          <div className="listNumber">Nummer</div>
           <div className="listName">Navn</div>
           <div className="listCountry">Land</div>
           <div className="listButtons"></div>
@@ -120,7 +135,7 @@ class ArtistList extends React.Component {
 class ArtistListItem extends React.Component {
   
   onClickClose(removeName) {
-    fetch("http://10.111.55.107:3000/artists/delete", {
+    fetch("http://localhost:3000/artists/delete", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -129,18 +144,19 @@ class ArtistListItem extends React.Component {
     }).then((respons) => {respons.json().then((artistArr) => this.props.updateList(artistArr));})
     .catch((err) => console.log(err.message));
   }
-  onClickEdit(newName, newCountry, newImageURL, newId) {
-    this.props.changeArtist(newName, newCountry, newImageURL, newId);
+  onClickEdit(newName, newCountry, newImageURL, newId, newNumber) {
+    this.props.changeArtist(newName, newCountry, newImageURL, newId, newNumber);
     this.onClickClose(newName);
   }
  
   render () {
     return(
         <div className="listItem" >
+          <div className="listNumber">{this.props.item.number} </div>
           <div className="listName">{this.props.item.name} </div>
           <div className="listCountry">{this.props.item.country} </div>
           <div className="listButtons">
-            <button type="button" className="edit" onClick={() => this.onClickEdit(this.props.item.name, this.props.item.country, this.props.item.imageURL, this.props.item.id)}>Edit</button>
+            <button type="button" className="edit" onClick={() => this.onClickEdit(this.props.item.name, this.props.item.country, this.props.item.imageURL, this.props.item.id, this.props.item.number)}>Edit</button>
             <button type="button" className="close" onClick={() => this.onClickClose(this.props.item.name)}>&times;</button>
           </div>
         </div>
