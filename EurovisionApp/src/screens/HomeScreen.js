@@ -48,15 +48,13 @@ class HomeScreen extends React.Component {
     }
 
     render() {
-        var listitems = this
-            .state
-            .items
-            .map((item) => {
+        var listitems = this.state.items.map((item) => {
                 return (<ArtistCard
                     key={item._id}
                     image={item.imageURL}
                     artistName={item.name}
                     countryName={item.country}
+                    number={item.number}
                     onPress={() => this.props.navigation.navigate('Artist', {name: item.name})}/>);
             });
         var data = [
@@ -71,7 +69,7 @@ class HomeScreen extends React.Component {
                     <DropdownMenu style={{
                         flex: 1
                     }} //TODO: WHEN NO ELEMENTS IN DROPDOWNMENT, DROPDOWN MENU DISSAPEAR
-                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => this.setState({items: [{name:'Danier'}]})}>
+                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => this.setState({items: this.state.items.sort((a,b) => parseInt(a.number) - parseInt(b.number))})}>
                         {listitems}
                     </DropdownMenu>
                 </ View>
