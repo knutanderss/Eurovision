@@ -7,9 +7,6 @@ import UserProfile from '../components/UserProfile';
 import ArtistScreen from '../screens/ArtistScreen';
 
 
-
-
-
 export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props)

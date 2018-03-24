@@ -4,8 +4,8 @@ import {
   AsyncStorage,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'; 
-import LoginScreen from './src/views/LoginScreen';
-import HomeScreen from './src/views/HomeScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import HomeScreen from './src/screens/HomeScreen';
 
 
 type Props = {};
@@ -15,6 +15,7 @@ export default class App extends Component<Props> {
 
     this.state = {
       loggedIn: 'false',
+      checkSignedIn: false,
     }
     
   }
@@ -27,14 +28,17 @@ export default class App extends Component<Props> {
     (value) => {
       console.log('VALUE IS ' + value);
       if(!value) {
-        this.setState({ loggedIn: 'false' });
+        this.setState({ loggedIn: 'false', checkSignedIn: true});
       } else {
-        this.setState({ loggedIn: value });
+        this.setState({ loggedIn: value, checkSignedIn: true });
       }
     });
   }
   
   render() {
+    if(!this.state.checkSignedIn) {
+      return null;
+    }
     if(this.state.loggedIn === 'false') {
      return (<LoginScreen loggedIn = {this.loggedIn}/>);
     } else {

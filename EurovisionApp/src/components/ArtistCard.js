@@ -13,7 +13,7 @@ export default class ArtistCard extends React.Component {
         return (
             <View style={styles.artistCard}>
                 <View>
-                    <TouchableOpacity onPress={this.openArtist}>
+                    <TouchableOpacity onPress={this.props.onPress}>
                         <Image
                             style={{
                             width: 50,
