@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
     Platform,
     StyleSheet,
@@ -6,21 +7,36 @@ import {
     View,
     Image,
     StatusBar,
+    AsyncStorage,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'; 
+import StarRating from 'react-native-star-rating';
 
-type Props = {};
-export default class DetailsScreen extends Component<Props> {
+
+export default class ListScreen extends React.Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            starCount : 6,
+        }
+
+        AsyncStorage.getItem('name').then(name => {
+            AsyncStorage.getItem('pictureURL').then(url => {
+                AsyncStorage.getItem('id').then(id => {
+                    this.setState({name: name, url:url, id:id});
+                })
+            })
+        });
+
+        
         
     }
-    
+   
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Profile name={this.props.navigation.getParam('name', 'Ola Nordmann')} 
-                     url={this.props.navigation.getParam('url', 'http://media3.oakpark.com/Images/2/2/36431/2/1/2_2_36431_2_1_690x520.jpg')}/>
+            <Profile url={this.state.url} name={this.state.name}/>
             </View>
         );
     }
@@ -30,7 +46,7 @@ class Profile extends Component<Props> {
     render() {
      return (
          <View style={styles.container}>
-             <Image source={{uri: this.props.url}} style={{width: 50, height: 50}}/>
+             <Image style={styles.profileImage} source={{uri: this.props.url}}/>
              <Text style={styles.name}>{this.props.name}</ Text>
              </ View>
      );   
@@ -54,4 +70,9 @@ const styles = StyleSheet.create({
       marginBottom: 50,
       margin: 10,
     },
+    profileImage: {
+        height: 90,
+        borderRadius: 50,
+        width: 90,
+      },
   });

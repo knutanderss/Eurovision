@@ -7,11 +7,22 @@ import {
   View,
   Image,
   StatusBar,
+  AsyncStorage,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'; 
 
 type Props = {};
 export default class LoginScreen extends Component<Props> {
+    constructor(props) {
+      super(props)
+    }
+
+    sendAccountToServer(accessToken) {
+        fetch(`http://192.168.0.198:3000/api/user/${accessToken}/userinfo`, {
+      method: 'GET',
+    });
+}
+    
     render() {
       return (
         <View style={styles.container}>
@@ -39,7 +50,12 @@ export default class LoginScreen extends Component<Props> {
                         if (error) {
                           alert("Error: " + error.toString());
                         } else {
-                          this.props.navigation.navigate('List', {url:result.picture.data.url, name: result.name, token: result.token});
+                            AsyncStorage.setItem('loggedIn', 'true');
+                            AsyncStorage.setItem('pictureURL', result.picture.data.url);
+                            AsyncStorage.setItem('name', result.name);
+                            AsyncStorage.setItem('id', result.id);
+                            this.sendAccountToServer(accessToken);
+                            this.props.loggedIn();
                         }
                       }
   
