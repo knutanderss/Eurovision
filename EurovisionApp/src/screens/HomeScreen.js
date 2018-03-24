@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 
-import {Platform, StyleSheet, AsyncStorage, ScrollView, TouchableOpacity} from 'react-native';
+import {
+    Platform,
+    StyleSheet,
+    AsyncStorage,
+    ScrollView,
+    TouchableOpacity,
+    StatusBar
+} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import ArtistCard from '../components/ArtistCard';
 import UserProfile from '../components/UserProfile';
@@ -9,9 +16,9 @@ import ArtistScreen from '../screens/ArtistScreen';
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {items: []}
 
-        this.state = {}
-
+        this.getArtistsFromServer();
         AsyncStorage
             .getItem('name')
             .then(name => {
@@ -27,15 +34,24 @@ class HomeScreen extends React.Component {
             });
     }
 
+    getArtistsFromServer() {
+        fetch("http://192.168.0.176:3000/artists", {
+          method: 'GET'
+        }).then((respons) => {respons.json().then((artistArr) => this.setState({items: artistArr}))})
+        .catch((err) => console.log(err.message));
+      }
+
     render() {
+        var listitems = this.state.items.map((item) => {
+            return (
+              <ArtistCard key={item._id} image={item.imageURL} artistName={item.name} countryName={item.country} onPress={() => this.props.navigation.navigate('Artist', {name: item.name})}  />
+            );
+          });
         return (
             <ScrollView style={styles.container}>
+                <StatusBar hidden={true}/>
                 <UserProfile url={this.state.url} name={this.state.name}/>
-                <ArtistCard
-                    image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Alexander_Rybak_001.jpg/1200px-Alexander_Rybak_001.jpg"
-                    artistName="Alexander Rybakk"
-                    countryName="Norge"
-                    onPress={() => this.props.navigation.navigate('Artist')}/>
+                {listitems}
             </ScrollView>
         );
     }
@@ -51,13 +67,11 @@ const styles = StyleSheet.create({
 export default StackNavigator({
     Home: {
         screen: HomeScreen,
-        navigationOptions: ({ navigation }) => ({
-            header: null,
-          }),
+        navigationOptions: ({navigation}) => ({header: null})
     },
     Artist: {
         screen: ArtistScreen
     }
 }, {
-    initialRouteName: 'Home',
+    initialRouteName: 'Home'
 },);

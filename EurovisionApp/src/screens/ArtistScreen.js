@@ -15,7 +15,8 @@ export default class ArtistScreen extends React.Component {
     render() {
         return(
             <View>
-                <Text>noe</Text>
+                <StatusBar hidden={true} />
+                <Text>{this.props.navigation.getParam('name', 'noen')}</Text>
             </View>
         );
     }
