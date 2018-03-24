@@ -6,8 +6,7 @@ import ArtistCard from '../components/ArtistCard';
 import UserProfile from '../components/UserProfile';
 import ArtistScreen from '../screens/ArtistScreen';
 
-
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
     constructor(props) {
         super(props)
 
@@ -35,7 +34,8 @@ export default class HomeScreen extends React.Component {
                 <ArtistCard
                     image="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Alexander_Rybak_001.jpg/1200px-Alexander_Rybak_001.jpg"
                     artistName="Alexander Rybakk"
-                    countryName="Norge"/>
+                    countryName="Norge"
+                    onPress={() => this.props.navigation.navigate('Artist')}/>
             </ScrollView>
         );
     }
@@ -47,3 +47,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#D64541'
     }
 });
+
+export default StackNavigator({
+    Home: {
+        screen: HomeScreen,
+        navigationOptions: ({ navigation }) => ({
+            header: null,
+          }),
+    },
+    Artist: {
+        screen: ArtistScreen
+    }
+}, {
+    initialRouteName: 'Home',
+},);
