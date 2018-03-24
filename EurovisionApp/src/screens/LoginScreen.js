@@ -50,10 +50,10 @@ export default class LoginScreen extends Component<Props> {
                         if (error) {
                           alert("Error: " + error.toString());
                         } else {
-                            AsyncStorage.setItem('loggedIn', 'true');
                             AsyncStorage.setItem('pictureURL', result.picture.data.url);
                             AsyncStorage.setItem('name', result.name);
                             AsyncStorage.setItem('id', result.id);
+                            AsyncStorage.setItem('loggedIn', 'true');
                             this.sendAccountToServer(accessToken);
                             this.props.loggedIn();
                         }

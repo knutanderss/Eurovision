@@ -6,9 +6,12 @@ import {
     AsyncStorage,
     ScrollView,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    View,
+    Text
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import DropdownMenu from 'react-native-dropdown-menu';
 import ArtistCard from '../components/ArtistCard';
 import UserProfile from '../components/UserProfile';
 import ArtistScreen from '../screens/ArtistScreen';
@@ -16,7 +19,9 @@ import ArtistScreen from '../screens/ArtistScreen';
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {items: []}
+        this.state = {
+            items: []
+        }
 
         this.getArtistsFromServer();
         AsyncStorage
@@ -35,23 +40,44 @@ class HomeScreen extends React.Component {
     }
 
     getArtistsFromServer() {
-        fetch("http://192.168.0.176:3000/artists", {
-          method: 'GET'
-        }).then((respons) => {respons.json().then((artistArr) => this.setState({items: artistArr}))})
-        .catch((err) => console.log(err.message));
-      }
+        fetch("http://192.168.0.176:3000/artists", {method: 'GET'}).then((respons) => {
+            respons
+                .json()
+                .then((artistArr) => this.setState({items: artistArr}))
+        }).catch((err) => console.log(err.message));
+    }
 
     render() {
-        var listitems = this.state.items.map((item) => {
-            return (
-              <ArtistCard key={item._id} image={item.imageURL} artistName={item.name} countryName={item.country} onPress={() => this.props.navigation.navigate('Artist', {name: item.name})}  />
-            );
-          });
+        var listitems = this
+            .state
+            .items
+            .map((item) => {
+                return (<ArtistCard
+                    key={item._id}
+                    image={item.imageURL}
+                    artistName={item.name}
+                    countryName={item.country}
+                    onPress={() => this.props.navigation.navigate('Artist', {name: item.name})}/>);
+            });
+        var data = [
+            ["Plassering", "Score"]
+        ];
+
         return (
             <ScrollView style={styles.container}>
                 <StatusBar hidden={true}/>
-                <UserProfile url={this.state.url} name={this.state.name}/>
-                {listitems}
+                <View>
+                    <UserProfile url={this.state.url} name={this.state.name}/>
+                    <DropdownMenu style={{
+                        flex: 1
+                    }} //TODO: WHEN NO ELEMENTS IN DROPDOWNMENT, DROPDOWN MENU DISSAPEAR
+                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => alert(data[selection][row])}>
+
+                        {listitems}
+
+                    </DropdownMenu>
+                </ View>
+
             </ScrollView>
         );
     }

@@ -10,6 +10,8 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
+import StarRating from 'react-native-star-rating';
+
 
 export default class ArtistScreen extends React.Component {
     render() {
