@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {LoginManager} from 'react-native-fbsdk';
 import {
     Platform,
     StyleSheet,
@@ -8,7 +8,9 @@ import {
     TouchableOpacity,
     StatusBar,
     View,
-    Text
+    Text,
+    Button,
+    RefreshControl,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import DropdownMenu from 'react-native-dropdown-menu';
@@ -39,8 +41,17 @@ class HomeScreen extends React.Component {
             });
     }
 
+    facebookLogout() {
+        LoginManager.logOut();
+        AsyncStorage.removeItem('name');
+        AsyncStorage.removeItem('id');
+        AsyncStorage.setItem('loggedIn', 'false');
+
+
+    }
+
     getArtistsFromServer() {
-        fetch("http://192.168.0.176:3000/artists", {method: 'GET'}).then((respons) => {
+        fetch("http://172.31.98.3:3000/artists", {method: 'GET'}).then((respons) => {
             respons
                 .json()
                 .then((artistArr) => this.setState({items: artistArr}))
@@ -48,7 +59,10 @@ class HomeScreen extends React.Component {
     }
 
     render() {
-        var listitems = this.state.items.map((item) => {
+        var listitems = this
+            .state
+            .items
+            .map((item) => {
                 return (<ArtistCard
                     key={item._id}
                     image={item.imageURL}
@@ -58,18 +72,27 @@ class HomeScreen extends React.Component {
                     onPress={() => this.props.navigation.navigate('Artist', {name: item.name})}/>);
             });
         var data = [
-            ["Plassering", "Score"]
+            [
+                "Plassering", "Score"
+            ],
+            ["Innstillinger", "Logg av"]
         ];
 
         return (
             <ScrollView style={styles.container}>
                 <StatusBar hidden={true}/>
                 <View>
+                    <Button title="Knapp" onPress={this.facebookLogout}/>
                     <UserProfile url={this.state.url} name={this.state.name}/>
                     <DropdownMenu style={{
                         flex: 1
                     }} //TODO: WHEN NO ELEMENTS IN DROPDOWNMENT, DROPDOWN MENU DISSAPEAR
-                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => this.setState({items: this.state.items.sort((a,b) => parseInt(a.number) - parseInt(b.number))})}>
+                        data={data} maxHeight={410} bgColor={'#D64541'} handler={(selection, row) => this.setState({
+                        items: this
+                            .state
+                            .items
+                            .sort((a, b) => parseInt(a.number) - parseInt(b.number))
+                    })}>
                         {listitems}
                     </DropdownMenu>
                 </ View>
