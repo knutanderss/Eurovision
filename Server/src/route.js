@@ -50,7 +50,7 @@ module.exports = (app) => {
     console.log(name + ' deleted.')
   })
 
-  app.get('/watch', (req, res) => {
+  app.get('*', (req, res) => {
     return res.sendFile(path.join(staticDir, 'index.html'))
   })
 }
