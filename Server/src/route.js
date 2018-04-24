@@ -1,3 +1,5 @@
+const express = require('express')
+const path = require('path')
 const {
   putArtist,
   getArtists,
@@ -16,6 +18,9 @@ const sendBackArtists = res => {
 }
 
 module.exports = (app) => {
+
+  const staticDir = __dirname + "../../../watch/build";
+  app.use(express.static(staticDir))
 
   app.get('/version', (req, res) => {
     res.send('1')
@@ -43,5 +48,9 @@ module.exports = (app) => {
       .catch(sendBackDbError(res))
 
     console.log(name + ' deleted.')
+  })
+
+  app.get('/watch', (req, res) => {
+    return res.sendFile(path.join(staticDir, 'index.html'))
   })
 }
