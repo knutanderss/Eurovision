@@ -2,6 +2,9 @@
   "name": "watch",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "9.11.1"
+  },
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
