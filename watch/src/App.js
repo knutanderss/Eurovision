@@ -25,7 +25,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/artists')
+    console.log(process.env)
+    fetch((process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '') + '/artists')
       .then(result => result.json())
       .then(artists => this.setState({
         ...this.state,
