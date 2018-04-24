@@ -16,6 +16,11 @@ const sendBackArtists = res => {
 }
 
 module.exports = (app) => {
+
+  app.get('/version', (req, res) => {
+    res.send('1')
+  })
+
   app.get('/artists', (req, res) => {
     sendBackArtists(res)
   })
