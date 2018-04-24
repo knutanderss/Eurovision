@@ -1,28 +1,52 @@
-.App {
+body {
+  background-color: #1E28A7;
+}
+
+h1 {
+  font-family: 'BioRhyme', serif;
+  font-size: 5em;
+  color: white;
+  letter-spacing: 0.05em;
+  text-shadow: 5px 5px 10px rgb(0, 0, 0);
+}
+
+header {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.artist-element {
+  margin: 5px auto;
+  width: 1400px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.artist-name {
+  margin-right: 10px;
+  font-size: 2em;
+  width: 400px;
 }
 
-.App-title {
+.song-name {
+  padding-top: 8px;
   font-size: 1.5em;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.8)
 }
 
-.App-intro {
-  font-size: large;
+.score {
+  margin-left: auto;
+  margin-right: 20px;
+  font-size: 2.5em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+img.flag {
+  height: 90%;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 20px;
 }
