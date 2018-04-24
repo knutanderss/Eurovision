@@ -10,7 +10,10 @@ const sendBackDbError = res => res.status(500).send({error: 'Problem with db-con
 
 const sendBackArtists = res => {
   getArtists()
-    .then(artists => res.send(JSON.stringify(artists)))
+    .then(artists => {
+      res.setHeader('Content-Type', 'application/json')
+      res.send(JSON.stringify(artists))
+    })
     .catch(err => {
       console.log(err)
       sendBackDbError(res)

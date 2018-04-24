@@ -4,6 +4,7 @@ const db_password = process.env.DB_PASSWORD
 const db_uri = `mongodb://${db_username}:${db_password}@eurovision-shard-00-00-lfpzu.mongodb.net:27017,eurovision-shard-00-01-lfpzu.mongodb.net:27017,eurovision-shard-00-02-lfpzu.mongodb.net:27017/test?ssl=true&replicaSet=Eurovision-shard-0&authSource=admin`
 const artists_collection = 'artists'
 const db = mongojs(db_uri, [artists_collection])
+const fetch = require('node-fetch')
 
 const getArtists = () => {
   return new Promise((resolve, reject) => {
@@ -33,5 +34,3 @@ const putArtist = artist => {
 }
 
 module.exports = {getArtists, deleteArtist, putArtist}
-
-

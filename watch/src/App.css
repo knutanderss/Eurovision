@@ -1,4 +1,4 @@
-body {
+body, *:fullscreen {
   background-color: #1E28A7;
 }
 
@@ -8,16 +8,23 @@ h1 {
   color: white;
   letter-spacing: 0.05em;
   text-shadow: 5px 5px 10px rgb(0, 0, 0);
+  z-index: 7;
+  margin: 20px;
 }
 
 header {
   text-align: center;
+  z-index: 10;
+}
+
+.artist-list {
+  z-index: 10;
 }
 
 .artist-element {
   margin: 5px auto;
-  width: 1400px;
-  height: 60px;
+  width: 1200px;
+  height: 50px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 7px;
   display: flex;
@@ -26,16 +33,15 @@ header {
 }
 
 .artist-name {
-  margin-right: 10px;
+  margin-right: 40px;
   font-size: 2em;
-  width: 400px;
 }
 
 .song-name {
   padding-top: 8px;
   font-size: 1.5em;
   font-style: italic;
-  color: rgba(0, 0, 0, 0.8)
+  color: rgba(0, 0, 0, 0.7)
 }
 
 .score {

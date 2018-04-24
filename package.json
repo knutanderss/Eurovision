@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
+    "dev": "concurrently \"npm start\" \"cd watch && PORT=5000 npm start\"",
     "postinstall": "cd watch && npm install && npm run build"
   },
   "author": "",
@@ -20,9 +21,13 @@
     "express-ws": "^3.0.0",
     "mongodb": "^3.0.7",
     "mongodb-promise": "0.0.4",
-    "mongojs": "^2.5.0"
+    "mongojs": "^2.5.0",
+    "node-fetch": "^2.1.2",
+    "react-fullscreen": "^0.1.0",
+    "react-fullscreen-crossbrowser": "^1.0.9"
   },
   "devDependencies": {
+    "concurrently": "^3.5.1",
     "nodemon": "^1.17.3"
   }
 }
