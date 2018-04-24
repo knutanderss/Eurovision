@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "postinstall": "cd watch && npm run build"
+    "postinstall": "cd watch && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
