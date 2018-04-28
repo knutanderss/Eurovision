@@ -11,6 +11,7 @@
     "flow-coverage": "flow coverage"
   },
   "dependencies": {
+    "babel-preset-flow": "^6.23.0",
     "react": "16.3.1",
     "react-native": "^0.52.0",
     "react-redux": "^5.0.7",

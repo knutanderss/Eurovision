@@ -10,7 +10,7 @@ import {
 import * as Actions from '../../actions'
 import style from './style';
 
-export class Login extends Component {
+export class Login extends Component<{}> {
   render() {
     return (
       <View style={style.container}>

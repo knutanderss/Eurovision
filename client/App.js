@@ -4,20 +4,21 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/lib/integration/react';
+import React, {Component} from 'react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
 
-import Login from './src/components/login'
-import { persistor, store } from './src/store';
+import Login from './src/components/login';
+import Home from './src/components/home';
+import {persistor, store} from './src/store';
 
-export default class App extends Component {
+export default class App extends Component<$FlowFixMeProps> {
   render () {
-    console.log(this.props);
+    console.log (this.props);
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Login/>
+          <Home />
         </PersistGate>
       </Provider>
     );

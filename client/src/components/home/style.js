@@ -1,5 +1,11 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const styles = StyleSheet.create({
-  
-})
+export default StyleSheet.create ({
+  container: {
+    backgroundColor: '#1C2EA0',
+    flex: 1,
+  },
+  name: {
+    color: '#FFF',
+  },
+});
