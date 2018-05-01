@@ -12,4 +12,7 @@ export default StyleSheet.create ({
   name: {
     color: '#FFF',
   },
+  statusBar: {
+    backgroundColor: BACKGROUND_COLOR,
+  },
 });

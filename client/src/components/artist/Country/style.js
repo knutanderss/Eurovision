@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
+import {TITLE_FONT} from '../../../assets/constants';
 
 export default StyleSheet.create ({
   container: {
     flexDirection: 'row',
     padding: 15,
-    borderBottomColor: '#FFFFFF',
+    borderBottomColor: 'white',
     borderBottomWidth: 1,
     justifyContent: 'center',
   },
@@ -14,11 +15,12 @@ export default StyleSheet.create ({
     marginRight: 10,
   },
   country: {
+    fontFamily: TITLE_FONT,
     fontSize: 20,
-    color: '#FFFFFF',
+    color: 'white',
   },
   artist: {
     marginTop: -3,
-    color: '#FFFFFF',
+    color: 'white',
   },
 });
