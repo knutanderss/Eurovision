@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableHighlight} from 'react-native';
 import style from './style';
 import flag from './../../../assets/flag.png';
 
