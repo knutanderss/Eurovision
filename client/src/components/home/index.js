@@ -6,8 +6,6 @@ import Profile from './profile';
 import style from './style';
 import ArtistCard from './artistCard';
 
-type Prop = {};
-
 export class Home extends Component<Prop> {
   render () {
     let cards = [];

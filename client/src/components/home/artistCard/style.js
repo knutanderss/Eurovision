@@ -1,6 +1,5 @@
-import {StyleSheet, Platform} from 'react-native';
-
-const ios = Platform.OS === 'ios';
+import {StyleSheet} from 'react-native';
+import {TITLE_FONT} from '../../../assets/constants';
 
 export default StyleSheet.create ({
   container: {
@@ -22,7 +21,7 @@ export default StyleSheet.create ({
   country: {
     fontSize: 20,
     color: '#FFF',
-    fontFamily: ios ? 'American Typewriter' : 'serif',
+    fontFamily: TITLE_FONT,
     fontWeight: 'bold',
     marginTop: -3,
   },
