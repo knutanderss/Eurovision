@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, StatusBar} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Profile from './profile';
@@ -14,6 +14,7 @@ export class Home extends Component<Prop> {
     }
     return (
       <View style={style.container}>
+        <StatusBar style={style.statusBar} barStyle="light-content" />
         <Profile />
         <ScrollView>
           {cards}
