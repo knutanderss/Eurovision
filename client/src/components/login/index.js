@@ -1,32 +1,33 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { 
-  View, 
-  Text,
-  Button
-} from 'react-native'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {View, Text, Button} from 'react-native';
+import FBButton from './loginButton';
 
-import * as Actions from '../../actions'
+import * as Actions from '../../actions';
 import style from './style';
 
 export class Login extends Component<{}> {
-  render() {
+  render () {
+    console.log (this.props);
     return (
       <View style={style.container}>
         <Text style={style.loginText}>Login Page</Text>
-        <Button color="#d40000" title="Login" onPress={() => {}} />
+        <FBButton />
       </View>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
+const mapStateToProps = state => {
+  console.log (state);
+  return {
+    counter: state.dataReducer.counter,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(Actions, dispatch); 
-}
+  return bindActionCreators (Actions, dispatch);
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect (mapStateToProps, mapDispatchToProps) (Login);

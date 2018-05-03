@@ -11,13 +11,17 @@
     "flow-coverage": "flow coverage"
   },
   "dependencies": {
+    "adm-zip": "^0.4.9",
     "babel-preset-flow": "^6.23.0",
+    "plist": "^3.0.1",
     "react": "16.3.1",
     "react-native": "^0.52.0",
+    "react-native-fbsdk": "^0.7.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-persist": "^5.9.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "xcode": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
