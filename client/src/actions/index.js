@@ -1,21 +1,20 @@
-import {TEST_ACTION} from './types';
+import * as Action from './types';
+import {
+  AccessToken,
+  GraphRequestManager,
+  GraphRequest,
+} from 'react-native-fbsdk';
+import requestUserInfo from '../lib/graphApi';
+import {SERVER_URL} from '../assets/constants';
 
-export function getData () {
+export function accessTokenReceived () {
   return dispatch => {
-    setTimeout (() => {
+    AccessToken.getCurrentAccessToken ().then (data => {
       dispatch ({
-        type: TEST_ACTION,
-        payload: 'This is some payload',
+        type: Action.ACCESS_TOKEN_RECEIVED,
+        payload: data.accessToken.toString (),
       });
-    }, 500);
-  };
-}
-
-export function userLoggedIn () {
-  return dispatch => {
-    dispatch ({
-      type: 'USER_LOGGED_IN',
-      payload: 'some payload',
+      requestUserInfo (data.accessToken, dispatch);
     });
   };
 }
@@ -23,7 +22,23 @@ export function userLoggedIn () {
 export function userLoggedOut () {
   return dispatch => {
     dispatch ({
-      type: 'USER_LOGGED_OUT',
+      type: Action.USER_LOGGED_OUT,
     });
+  };
+}
+
+export function requestArtists () {
+  return dispatch => {
+    fetch (SERVER_URL + '/artists')
+      .then (result => result.json ())
+      .then (result => {
+        dispatch ({
+          type: Action.ARTISTS_FETCHED,
+          payload: result,
+        });
+      })
+      .catch (error => {
+        console.log (error);
+      });
   };
 }

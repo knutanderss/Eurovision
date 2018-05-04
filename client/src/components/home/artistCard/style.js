@@ -4,6 +4,7 @@ import {TITLE_FONT} from '../../../assets/constants';
 export default StyleSheet.create ({
   container: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     backgroundColor: '#FFFFFF66',
     borderRadius: 5,
     height: 50,
@@ -15,9 +16,10 @@ export default StyleSheet.create ({
   flag: {
     marginRight: 10,
     borderRadius: 3,
-    width: 60,
+    width: 53,
     height: 40,
   },
+  info: {},
   country: {
     fontSize: 20,
     color: '#FFF',
@@ -27,6 +29,5 @@ export default StyleSheet.create ({
   },
   artist: {
     color: '#FFFFFFAA',
-    marginTop: -3,
   },
 });

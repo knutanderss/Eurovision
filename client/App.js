@@ -12,15 +12,17 @@ import Login from './src/components/login';
 import Home from './src/components/home';
 import Artist from './src/components/artist';
 import {persistor, store} from './src/store';
-import App2 from './App2';
+import Front from './src/components/front';
 
-export default class App extends Component {
+type Props = {};
+
+export default class App extends Component<Props> {
   render () {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Login />
-        </PersistGate>{' '}
+          <Front />
+        </PersistGate>
       </Provider>
     );
   }

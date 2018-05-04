@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
+import {LoginButton} from 'react-native-fbsdk';
 import * as Actions from '../../../actions';
 
 export class FBButton extends Component {
@@ -12,11 +12,11 @@ export class FBButton extends Component {
       <LoginButton
         onLoginFinished={(error, result) => {
           if (error) {
-            alert ('Login failed with error: ' + result.error);
+            alert ('Logg inn feilet: ' + result.error);
           } else if (result.isCancelled) {
-            alert ('Login was cancelled');
+            alert ('Login ble avbrutt');
           } else {
-            this.props.userLoggedIn ();
+            this.props.accessTokenReceived ();
           }
         }}
         onLogoutFinished={this.props.userLoggedOut}

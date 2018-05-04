@@ -2,20 +2,29 @@ import React, {Component} from 'react';
 import {View, Text, ScrollView, StatusBar} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import Profile from './profile';
 import style from './style';
 import ArtistCard from './artistCard';
+import * as Action from '../../actions';
 
 export class Home extends Component<Prop> {
+  componentWillMount () {
+    this.props.requestArtists ();
+  }
+
   render () {
     let cards = [];
-    for (let i = 0; i < 10; i++) {
-      cards.push (<ArtistCard key={i} />);
+    if (this.props.artists) {
+      console.log (this.props.artists[0]);
+      cards = this.props.artists.map (artist => (
+        <ArtistCard key={artist._id} artist={artist.artist} />
+      ));
     }
     return (
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
-        <Profile />
+        <Profile user={this.props.user} />
         <ScrollView>
           {cards}
         </ScrollView>
@@ -24,8 +33,13 @@ export class Home extends Component<Prop> {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.userReducer.user,
+  artists: state.artistsReducer.artists,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators (Action, dispatch);
+};
 
 export default connect (mapStateToProps, mapDispatchToProps) (Home);

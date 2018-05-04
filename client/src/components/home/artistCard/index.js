@@ -1,15 +1,26 @@
 import React from 'react';
 import {View, Text, Image, TouchableHighlight} from 'react-native';
 import style from './style';
-import flag from './../../../assets/flag.png';
+import SVGImage from 'react-native-svg-image';
 
-export default () => {
+const getFlag = abbr => {
+  return 'https://lipis.github.io/flag-icon-css/flags/4x3/' + abbr + '.svg';
+};
+
+export default props => {
+  const flag = {uri: getFlag (props.artist.abbr)};
+  let info = props.artist.name + ' - ' + props.artist.song;
+  info = info.length > 39 ? info.slice (0, 39) + '...' : info;
   return (
     <View style={style.container}>
-      <Image style={style.flag} source={flag} />
       <View style={style.info}>
-        <Text style={style.country}>South Africa</Text>
-        <Text style={style.artist}>Some Artist - With Some Song</Text>
+        <SVGImage style={style.flag} source={flag} />
+      </View>
+      <View style={style.info}>
+        <Text style={style.country}>{props.artist.country}</Text>
+        <Text style={style.artist}>
+          {info}
+        </Text>
       </View>
     </View>
   );

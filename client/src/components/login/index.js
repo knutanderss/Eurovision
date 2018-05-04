@@ -12,7 +12,8 @@ export class Login extends Component<{}> {
     console.log (this.props);
     return (
       <View style={style.container}>
-        <Text style={style.loginText}>Login Page</Text>
+        <Text style={style.loginText}>Logg inn</Text>
+        <Text>{this.props.accessToken ? this.props.accessToken : null}</Text>
         <FBButton />
       </View>
     );
@@ -20,9 +21,9 @@ export class Login extends Component<{}> {
 }
 
 const mapStateToProps = state => {
-  console.log (state);
   return {
-    counter: state.dataReducer.counter,
+    user: state.userReducer.user,
+    accessToken: state.userReducer.accessToken,
   };
 };
 

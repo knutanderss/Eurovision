@@ -13,11 +13,12 @@ export default StyleSheet.create ({
   },
   name: {
     color: 'white',
-    fontSize: 30,
+    fontSize: 25,
     fontFamily: TITLE_FONT,
+    marginTop: 3,
   },
   picture: {
-    width: 40,
+    width: 30,
     height: 40,
     marginRight: 20,
   },
