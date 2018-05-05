@@ -52,9 +52,7 @@ const putArtist = artist => {
   return new Promise((resolve, reject) => {
     db
       .artists
-      .insert({
-        artist
-      }, err => {
+      .insert(artist, err => {
         if (err) 
           reject(err)
         else 
