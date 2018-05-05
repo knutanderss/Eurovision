@@ -37,9 +37,7 @@ export function requestArtists () {
           payload: result,
         });
       })
-      .catch (error => {
-        console.log (error);
-      });
+      .catch (console.log);
   };
 }
 
