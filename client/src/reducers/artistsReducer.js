@@ -1,6 +1,6 @@
 import * as Action from '../actions/types';
 
-const artistsState = {artists: null};
+const artistsState = {artists: null, voteoptions: null};
 
 export default (state = artistsState, action) => {
   switch (action.type) {
@@ -8,6 +8,11 @@ export default (state = artistsState, action) => {
       return {
         ...state,
         artists: action.payload,
+      };
+    case Action.VOTE_OPTIONS_FETCHED:
+      return {
+        ...state,
+        voteoptions: action.payload,
       };
     default:
       return state;

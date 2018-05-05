@@ -42,3 +42,18 @@ export function requestArtists () {
       });
   };
 }
+
+export function requestVoteOptions () {
+  return dispatch => {
+    fetch (SERVER_URL + '/voteoptions')
+      .then (result => result.json ())
+      .then (result => {
+        console.log (result[0].options);
+        dispatch ({
+          type: Action.VOTE_OPTIONS_FETCHED,
+          payload: result[0].options,
+        });
+      })
+      .catch (console.log);
+  };
+}

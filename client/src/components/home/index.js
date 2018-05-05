@@ -11,6 +11,7 @@ import * as Action from '../../actions';
 export class Home extends Component<Prop> {
   componentWillMount () {
     this.props.requestArtists ();
+    this.props.requestVoteOptions ();
   }
 
   render () {
