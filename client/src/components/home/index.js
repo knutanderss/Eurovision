@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, ScrollView, StatusBar} from 'react-native';
+import {View, Text, ScrollView, StatusBar, FlatList} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -15,28 +15,29 @@ class Home extends Component<Prop> {
   }
   static navigationOptions = {header: null};
 
+  createArtistCard = ({item}) => {
+    const artist = this.props.artists[item];
+    return (
+      <ArtistCard
+        artist={artist}
+        onPress={() =>
+          this.props.navigation.navigate ('Artist', {
+            country: artist.country,
+          })}
+      />
+    );
+  };
+
   render () {
-    let cards = [];
-    if (this.props.artists) {
-      const artList = this.props.artists;
-      cards = Object.keys (artList).map (artist => (
-        <ArtistCard
-          key={artList[artist]._id}
-          artist={artList[artist]}
-          onPress={() =>
-            this.props.navigation.navigate ('Artist', {
-              country: artList[artist].country,
-            })}
-        />
-      ));
-    }
     return (
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
         <Profile user={this.props.user} />
-        <ScrollView>
-          {cards}
-        </ScrollView>
+        <FlatList
+          data={Object.keys (this.props.artists)}
+          keyExtractor={(item, index) => item}
+          renderItem={this.createArtistCard}
+        />
       </View>
     );
   }
