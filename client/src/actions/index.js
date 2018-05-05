@@ -56,3 +56,17 @@ export function requestVoteOptions () {
       .catch (console.log);
   };
 }
+
+export const vote = (artist, option, rating) => {
+  console.log (`User voted ${rating} for ${option} for ${artist}`);
+  return dispatch => {
+    dispatch ({
+      type: Action.USER_VOTED,
+      payload: {
+        country: artist.country,
+        option: option,
+        vote: rating,
+      },
+    });
+  };
+};

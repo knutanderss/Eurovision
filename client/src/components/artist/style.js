@@ -14,6 +14,8 @@ export default (styles = StyleSheet.create ({
   },
   topView: {
     flexDirection: 'row',
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
   },
   statusBar: {
     backgroundColor: BACKGROUND_COLOR,

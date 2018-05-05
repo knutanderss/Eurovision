@@ -1,14 +1,32 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {View, Text, ScrollView, Button, StatusBar} from 'react-native';
 import Country from './Country';
 import VoteOption from './VoteOption';
 import style from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as Action from '../../actions';
 
-export default class Artist extends Component<Prop> {
+class Artist extends Component<Prop> {
   static navigationOptions = {header: null};
 
   render () {
+    const artist = this.props.navigation.state.params.artist;
+    console.log ('Artist: ');
+    console.log (artist);
+    const voteOptions = this.props.voteOptions.map ((option, index) => (
+      <VoteOption
+        key={index}
+        option={option}
+        artist={artist}
+        vote={this.props.vote}
+        rating={
+          artist.votes ? 3 : 0 // (artist.votes[option] ? artist.votes[option] : 0) : 0
+        }
+      />
+    ));
     return (
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
@@ -21,14 +39,27 @@ export default class Artist extends Component<Prop> {
               this.props.navigation.goBack ();
             }}
           />
-          <Country />
+          <Country
+            country={artist.country}
+            song={artist.song}
+            artist={artist.name}
+            abbr={artist.abbr}
+          />
         </View>
         <ScrollView>
-          <Text>Test: {this.props.navigation.state.params.artist.country}</Text>
-          <VoteOption />
-          <VoteOption />
+          {voteOptions}
         </ScrollView>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  voteOptions: state.artistsReducer.voteoptions,
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators (Action, dispatch);
+};
+
+export default connect (mapStateToProps, mapDispatchToProps) (Artist);

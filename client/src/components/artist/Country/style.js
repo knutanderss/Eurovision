@@ -5,8 +5,6 @@ export default StyleSheet.create ({
   container: {
     flexDirection: 'row',
     padding: 15,
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
     justifyContent: 'center',
   },
   flag: {

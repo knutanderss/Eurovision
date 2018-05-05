@@ -3,19 +3,19 @@ import {View, Text} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import style from './style';
 
-export default () => {
+export default props => {
   return (
     <View style={style.container}>
-      <Text style={style.voteText}>Sang</Text>
+      <Text style={style.voteText}>{props.option}</Text>
       <StarRating
         emptyStar={'md-star-outline'}
         fullStar={'md-star'}
         halfStar={'md-star-half'}
         iconSet={'Ionicons'}
         maxStars={5}
-        rating={2}
+        rating={0}
         halfStarEnabled={true}
-        selectedStar={rating => console.log ('Rating clicked!')}
+        selectedStar={rating => props.vote (props.artist, props.option, rating)}
         fullStarColor={'yellow'}
       />
     </View>
