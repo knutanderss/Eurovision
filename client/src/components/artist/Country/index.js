@@ -10,7 +10,6 @@ const getFlag = abbr => {
 export default props => {
   let info = props.artist + ' - ' + props.song;
   info = info.length > 39 ? info.slice (0, 39) + '...' : info;
-  console.log ('URI:' + props.flag);
   return (
     <View style={style.container}>
       <View>

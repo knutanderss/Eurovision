@@ -9,11 +9,9 @@ import style from './style';
 
 export class Login extends Component<{}> {
   render () {
-    console.log (this.props);
     return (
       <View style={style.container}>
         <Text style={style.loginText}>Logg inn</Text>
-        <Text>{this.props.accessToken ? this.props.accessToken : null}</Text>
         <FBButton />
       </View>
     );

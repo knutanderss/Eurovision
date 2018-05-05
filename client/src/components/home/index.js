@@ -14,17 +14,18 @@ class Home extends Component<Prop> {
     this.props.requestVoteOptions ();
   }
   static navigationOptions = {header: null};
+
   render () {
     let cards = [];
     if (this.props.artists) {
-      console.log (this.props.artists[0]);
-      cards = this.props.artists.map (artist => (
+      const artList = this.props.artists;
+      cards = Object.keys (artList).map (artist => (
         <ArtistCard
-          key={artist._id}
-          artist={artist.artist}
+          key={artList[artist]._id}
+          artist={artList[artist]}
           onPress={() =>
             this.props.navigation.navigate ('Artist', {
-              artist: artist.artist,
+              country: artList[artist].country,
             })}
         />
       ));

@@ -1,21 +1,13 @@
 import * as Action from '../actions/types';
 
-const artistsState = {artists: null, voteoptions: null};
+const artistsState = {artists: null, voteoptions: null, votes: {}};
 
-const updateArtistsVoteAndCopy = (oldArtistList, country, option, vote) => {
-  console.log ('START');
-  console.log (oldArtistList);
-  const artistList = oldArtistList.slice (0).map (artist => {
-    if (artist.artist.country === country) {
-      if (!artist.artist.votes) {
-        artist.artist.votes = {};
-      }
-      artist.artist.votes[option] = vote;
-    }
-    return artist;
+const convertArtistListToObject = artistList => {
+  let artists = {};
+  artistList.forEach (artist => {
+    artists[artist.country] = artist;
   });
-  console.log (artistList);
-  return artistList;
+  return artists;
 };
 
 export default (state = artistsState, action) => {
@@ -23,7 +15,7 @@ export default (state = artistsState, action) => {
     case Action.ARTISTS_FETCHED:
       return {
         ...state,
-        artists: action.payload,
+        artists: convertArtistListToObject (action.payload),
       };
     case Action.VOTE_OPTIONS_FETCHED:
       return {
@@ -31,14 +23,22 @@ export default (state = artistsState, action) => {
         voteoptions: action.payload,
       };
     case Action.USER_VOTED:
+      const country = action.payload.country;
+      const option = action.payload.option;
+      const artist = {
+        ...state.artists[country],
+        votes: {
+          ...state.artists[country].votes,
+        },
+      };
+      artist.votes[option] = action.payload.vote;
+      const artists = {
+        ...state.artists,
+      };
+      artists[country] = artist;
       return {
         ...state,
-        artists: updateArtistsVoteAndCopy (
-          state.artists,
-          action.payload.country,
-          action.payload.option,
-          action.payload.vote
-        ),
+        artists,
       };
     default:
       return state;

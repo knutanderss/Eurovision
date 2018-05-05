@@ -13,18 +13,15 @@ class Artist extends Component<Prop> {
   static navigationOptions = {header: null};
 
   render () {
-    const artist = this.props.navigation.state.params.artist;
-    console.log ('Artist: ');
-    console.log (artist);
+    const country = this.props.navigation.state.params.country;
+    const artist = this.props.artists[country];
     const voteOptions = this.props.voteOptions.map ((option, index) => (
       <VoteOption
         key={index}
         option={option}
         artist={artist}
         vote={this.props.vote}
-        rating={
-          artist.votes ? 3 : 0 // (artist.votes[option] ? artist.votes[option] : 0) : 0
-        }
+        rating={artist.votes[option] || 3}
       />
     ));
     return (
@@ -56,6 +53,7 @@ class Artist extends Component<Prop> {
 
 const mapStateToProps = state => ({
   voteOptions: state.artistsReducer.voteoptions,
+  artists: state.artistsReducer.artists,
 });
 
 const mapDispatchToProps = dispatch => {

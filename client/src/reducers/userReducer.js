@@ -16,7 +16,6 @@ export default (state = userState, action) => {
         accessToken: null,
       };
     case Action.USER_LOGGED_IN:
-      console.log (action.payload);
       return {
         ...state,
         user: action.payload,

@@ -28,7 +28,6 @@ export function userLoggedOut () {
 }
 
 export function requestArtists () {
-  console.log ('URL ' + SERVER_URL);
   return dispatch => {
     fetch (SERVER_URL + '/artists')
       .then (result => result.json ())
@@ -47,7 +46,6 @@ export function requestVoteOptions () {
     fetch (SERVER_URL + '/voteoptions')
       .then (result => result.json ())
       .then (result => {
-        console.log (result[0].options);
         dispatch ({
           type: Action.VOTE_OPTIONS_FETCHED,
           payload: result[0].options,
@@ -58,7 +56,6 @@ export function requestVoteOptions () {
 }
 
 export const vote = (artist, option, rating) => {
-  console.log (`User voted ${rating} for ${option} for ${artist}`);
   return dispatch => {
     dispatch ({
       type: Action.USER_VOTED,
