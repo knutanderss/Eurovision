@@ -18,6 +18,7 @@ export default StyleSheet.create ({
     borderRadius: 3,
     width: 53,
     height: 40,
+    borderRadius: 6,
   },
   info: {},
   country: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
 import style from './style';
-import SVGImage from 'react-native-svg-image';
+import * as flags from '../../../assets/flag';
 
 const getFlag = abbr => {
   return 'https://lipis.github.io/flag-icon-css/flags/4x3/' + abbr + '.svg';
@@ -13,7 +13,7 @@ export default props => {
   return (
     <View style={style.container}>
       <View>
-        <SVGImage source={{uri: getFlag (props.abbr)}} style={style.flag} />
+        <Image source={flags[props.abbr]} style={style.flag} />
       </View>
       <View>
         <Text style={style.country}>{props.country}</Text>
