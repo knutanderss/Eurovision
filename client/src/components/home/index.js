@@ -13,7 +13,7 @@ class Home extends Component<Prop> {
     this.props.requestArtists ();
     this.props.requestVoteOptions ();
   }
-
+  static navigationOptions = {header: null};
   render () {
     let cards = [];
     if (this.props.artists) {
