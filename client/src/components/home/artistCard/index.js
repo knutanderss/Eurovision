@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, TouchableHighlight} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import style from './style';
 import SVGImage from 'react-native-svg-image';
 
@@ -12,16 +12,18 @@ export default props => {
   let info = props.artist.name + ' - ' + props.artist.song;
   info = info.length > 39 ? info.slice (0, 39) + '...' : info;
   return (
-    <View style={style.container}>
-      <View style={style.info}>
-        <SVGImage style={style.flag} source={flag} />
+    <TouchableOpacity onPress={props.onPress}>
+      <View style={style.container}>
+        <View style={style.info}>
+          <SVGImage style={style.flag} source={flag} />
+        </View>
+        <View style={style.info}>
+          <Text style={style.country}>{props.artist.country}</Text>
+          <Text style={style.artist}>
+            {info}
+          </Text>
+        </View>
       </View>
-      <View style={style.info}>
-        <Text style={style.country}>{props.artist.country}</Text>
-        <Text style={style.artist}>
-          {info}
-        </Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };

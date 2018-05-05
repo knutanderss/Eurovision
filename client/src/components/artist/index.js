@@ -5,7 +5,9 @@ import VoteOption from './VoteOption';
 import style from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default () => {
+export default props => {
+  console.log ('State:');
+  console.log (props.navigation.state);
   return (
     <View style={style.container}>
       <StatusBar style={style.statusBar} barStyle="light-content" />
@@ -21,6 +23,7 @@ export default () => {
         <Country />
       </View>
       <ScrollView>
+        <Text>Test: {props.navigation.state.params.artist.country}</Text>
         <VoteOption />
         <VoteOption />
       </ScrollView>

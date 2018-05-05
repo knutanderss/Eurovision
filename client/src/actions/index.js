@@ -28,6 +28,7 @@ export function userLoggedOut () {
 }
 
 export function requestArtists () {
+  console.log ('URL ' + SERVER_URL);
   return dispatch => {
     fetch (SERVER_URL + '/artists')
       .then (result => result.json ())

@@ -8,7 +8,7 @@ import style from './style';
 import ArtistCard from './artistCard';
 import * as Action from '../../actions';
 
-export class Home extends Component<Prop> {
+class Home extends Component<Prop> {
   componentWillMount () {
     this.props.requestArtists ();
     this.props.requestVoteOptions ();
@@ -19,7 +19,14 @@ export class Home extends Component<Prop> {
     if (this.props.artists) {
       console.log (this.props.artists[0]);
       cards = this.props.artists.map (artist => (
-        <ArtistCard key={artist._id} artist={artist.artist} />
+        <ArtistCard
+          key={artist._id}
+          artist={artist.artist}
+          onPress={() =>
+            this.props.navigation.navigate ('Artist', {
+              artist: artist.artist,
+            })}
+        />
       ));
     }
     return (
