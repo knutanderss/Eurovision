@@ -14,7 +14,6 @@ class Home extends Component<Prop> {
     this.props.requestArtists ();
     this.props.requestVoteOptions ();
   }
-  static navigationOptions = {header: null};
 
   createArtistCard = ({item}) => {
     const artist = this.props.artists[item];

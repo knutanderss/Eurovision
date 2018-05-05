@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as Action from '../../actions';
 
 class Artist extends Component<Prop> {
-  static navigationOptions = {header: null, gesturesEnabled: true};
+  static navigationOptions = {gesturesEnabled: true};
 
   render () {
     const country = this.props.navigation.state.params.country;
