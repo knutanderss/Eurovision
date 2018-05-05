@@ -55,6 +55,19 @@ export function requestVoteOptions () {
   };
 }
 
+export function vote2 () {
+  return dispatch => {
+    fetch (SERVER_URL + '/vote', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify ({}),
+    });
+  };
+}
+
 export const vote = (artist, option, rating) => {
   return dispatch => {
     dispatch ({

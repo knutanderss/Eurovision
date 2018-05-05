@@ -1,8 +1,8 @@
 import * as Action from '../actions/types';
 
-const userState = {user: null, accessToken: null};
+const initialState = {user: null, accessToken: null};
 
-export default (state = userState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case Action.ACCESS_TOKEN_RECEIVED:
       return {
@@ -19,6 +19,10 @@ export default (state = userState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case Action.RESET:
+      return {
+        ...initialState,
       };
     default:
       return state;

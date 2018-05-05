@@ -1,6 +1,6 @@
 import * as Action from '../actions/types';
 
-const artistsState = {artists: null, voteoptions: null, votes: {}};
+const initialState = {artists: null, voteoptions: null, votes: {}};
 
 const convertArtistListToObject = artistList => {
   let artists = {};
@@ -10,7 +10,7 @@ const convertArtistListToObject = artistList => {
   return artists;
 };
 
-export default (state = artistsState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case Action.ARTISTS_FETCHED:
       return {
@@ -39,6 +39,10 @@ export default (state = artistsState, action) => {
       return {
         ...state,
         artists,
+      };
+    case Action.RESET:
+      return {
+        ...initialState,
       };
     default:
       return state;
