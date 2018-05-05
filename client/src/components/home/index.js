@@ -7,6 +7,7 @@ import Profile from './profile';
 import style from './style';
 import ArtistCard from './artistCard';
 import * as Action from '../../actions';
+import Loader from '../loader';
 
 class Home extends Component<Prop> {
   componentWillMount () {
@@ -33,11 +34,13 @@ class Home extends Component<Prop> {
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
         <Profile user={this.props.user} />
-        <FlatList
-          data={Object.keys (this.props.artists)}
-          keyExtractor={(item, index) => item}
-          renderItem={this.createArtistCard}
-        />
+        {this.props.artists
+          ? <FlatList
+              data={Object.keys (this.props.artists)}
+              keyExtractor={(item, index) => item}
+              renderItem={this.createArtistCard}
+            />
+          : <Loader />}
       </View>
     );
   }
