@@ -21,4 +21,8 @@ export default StyleSheet.create ({
     marginTop: -3,
     color: 'white',
   },
+  ticker: {
+    height: 20,
+    width: 200,
+  },
 });

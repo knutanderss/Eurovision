@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as Action from '../../actions';
 
 class Artist extends Component<Prop> {
-  static navigationOptions = {header: null};
+  static navigationOptions = {header: null, gesturesEnabled: true};
 
   render () {
     const country = this.props.navigation.state.params.country;
@@ -21,7 +21,7 @@ class Artist extends Component<Prop> {
         option={option}
         artist={artist}
         vote={this.props.vote}
-        rating={artist.votes[option] || 3}
+        rating={artist.votes[option] || 0}
       />
     ));
     return (
