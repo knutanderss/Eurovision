@@ -9,7 +9,7 @@ const RootStack = StackNavigator (
     Artist: {screen: Artist},
   },
   {
-    headerMode: 'screen',
+    headerMode: 'none',
   }
 );
 
