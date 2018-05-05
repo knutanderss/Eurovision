@@ -21,5 +21,6 @@ export default StyleSheet.create ({
     height: 40,
     borderRadius: 20,
     width: 40,
+    marginRight: 10,
   },
 });
