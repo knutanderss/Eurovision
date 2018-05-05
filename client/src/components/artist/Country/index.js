@@ -4,10 +4,6 @@ import style from './style';
 import * as flags from '../../../assets/flag';
 import TextTicker from 'react-native-text-ticker';
 
-const getFlag = abbr => {
-  return 'https://lipis.github.io/flag-icon-css/flags/4x3/' + abbr + '.svg';
-};
-
 export default props => {
   let info = props.artist + ' - ' + props.song;
   return (

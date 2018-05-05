@@ -18,8 +18,8 @@ export default StyleSheet.create ({
     marginTop: 3,
   },
   picture: {
-    width: 30,
     height: 40,
-    marginRight: 20,
+    borderRadius: 20,
+    width: 40,
   },
 });
