@@ -32,7 +32,6 @@ class Home extends Component<Prop> {
   };
 
   render () {
-    console.log (this.props.user);
     return (
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
