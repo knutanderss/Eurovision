@@ -8,7 +8,8 @@ import TextTicker from 'react-native-text-ticker';
 
 export default props => {
   const flag = flags[props.artist.abbr];
-  let info = props.artist.name + ' - ' + props.artist.song;
+  let info = props.artist.song;
+  info = info.length > 29 ? info.slice (0, 29) + '...' : info;
   return (
     <TouchableOpacity onPress={props.onPress}>
       <View style={style.container}>
@@ -18,16 +19,9 @@ export default props => {
           </View>
           <View style={style.info}>
             <Text style={style.country}>{props.artist.country}</Text>
-            <TextTicker
-              style={style.artist}
-              duration={7000}
-              loop
-              bounce={true}
-              repeatSpacer={50}
-              marqueeDelay={3000}
-            >
+            <Text style={style.artist}>
               {info}
-            </TextTicker>
+            </Text>
           </View>
         </View>
         <View style={style.artistState}>
