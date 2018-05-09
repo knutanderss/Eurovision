@@ -17,9 +17,12 @@ class Home extends Component<Prop> {
 
   createArtistCard = ({item}) => {
     const artist = this.props.artists[item];
+    const isDone =
+      Object.keys (artist.votes).length === this.props.voteOptions.length;
     return (
       <ArtistCard
         artist={artist}
+        isDone={isDone}
         onPress={() =>
           this.props.navigation.navigate ('Artist', {
             country: artist.country,
@@ -29,11 +32,12 @@ class Home extends Component<Prop> {
   };
 
   render () {
+    console.log (this.props.user);
     return (
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
         <Profile user={this.props.user} />
-        {this.props.artists
+        {this.props.artists && this.props.voteOptions
           ? <FlatList
               data={Object.keys (this.props.artists)}
               keyExtractor={(item, index) => item}
@@ -48,6 +52,7 @@ class Home extends Component<Prop> {
 const mapStateToProps = state => ({
   user: state.userReducer.user,
   artists: state.artistsReducer.artists,
+  voteOptions: state.artistsReducer.voteoptions,
 });
 
 const mapDispatchToProps = dispatch => {
