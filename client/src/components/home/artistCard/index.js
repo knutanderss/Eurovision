@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import style from './style';
-import SVGImage from 'react-native-svg-image';
 import * as flags from '../../../assets/flag';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TextTicker from 'react-native-text-ticker';
