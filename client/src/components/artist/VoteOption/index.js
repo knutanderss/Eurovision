@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import style from './style';
+import {COLOR_SCALE} from '../../../assets/constants';
 
 export default props => {
   return (
@@ -16,7 +17,7 @@ export default props => {
         rating={props.rating}
         halfStarEnabled={true}
         selectedStar={rating => props.vote (props.artist, props.option, rating)}
-        fullStarColor={'yellow'}
+        fullStarColor={COLOR_SCALE[2 * props.rating - 1]}
       />
     </View>
   );
