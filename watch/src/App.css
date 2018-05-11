@@ -19,12 +19,16 @@ header {
 
 .artist-list {
   z-index: 10;
+  column-count: 2;
+  column-gap: 5px;
+  height: 585px;
 }
 
 .artist-element {
-  margin: 5px auto;
-  width: 1200px;
-  height: 50px;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 630px;
+  height: 40px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 7px;
   display: flex;
@@ -33,13 +37,15 @@ header {
 }
 
 .artist-name {
-  margin-right: 40px;
-  font-size: 2em;
+  flex: 1;
+  margin-right: 5px;
+  font-size: 1.7em;
 }
 
 .song-name {
+  flex: 1;
   padding-top: 8px;
-  font-size: 1.5em;
+  font-size: 1.1em;
   font-style: italic;
   color: rgba(0, 0, 0, 0.7)
 }
