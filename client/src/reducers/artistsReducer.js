@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
     case Action.USER_VOTED:
       const country = action.payload.country;
       const option = action.payload.option;
-      console.log (country);
+      const difference = action.payload.difference;
       const artist = {
         ...state.artists[country],
         votes: {
@@ -33,10 +33,14 @@ export default (state = initialState, action) => {
         },
       };
       artist.votes[option] = action.payload.vote;
+      artist.totalScore = artist.totalScore
+        ? artist.totalScore + difference
+        : difference;
       const artists = {
         ...state.artists,
       };
       artists[country] = artist;
+      console.log (artist);
       return {
         ...state,
         artists,

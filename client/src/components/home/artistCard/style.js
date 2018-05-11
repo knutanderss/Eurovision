@@ -43,7 +43,7 @@ export default StyleSheet.create ({
   checkBox: {
     marginRight: 10,
   },
-  score: {
+  totalScore: {
     marginRight: 15,
     fontSize: 20,
     color: '#FFF',

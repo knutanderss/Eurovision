@@ -24,6 +24,9 @@ export default props => {
           </View>
         </View>
         <View style={style.artistState}>
+          <Text style={style.totalScore}>
+            {props.artist.totalScore ? props.artist.totalScore : 0}
+          </Text>
           {props.isDone
             ? <Ionicons
                 style={style.checkBox}
