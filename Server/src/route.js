@@ -1,6 +1,6 @@
 const express = require('express')
 const path = require('path')
-const {putArtist, getArtists, deleteArtist, getVoteOptions} = require('./db')
+const {putArtist, getArtists, deleteArtist, getVoteOptions, vote} = require('./db')
 
 const sendBackDbError = res => res
   .status(500)
@@ -61,6 +61,14 @@ module.exports = (app) => {
       console.log(err)
       sendBackDbError(res)
     })
+  })
+
+  app.post('/vote', (req, res) => {
+    console.log(req.body);
+    vote(req.body).catch(console.log);
+    res
+      .status(200)
+      .send();
   })
 
   app.get('*', (req, res) => {

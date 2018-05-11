@@ -20,6 +20,7 @@ class Artist extends Component<Prop> {
         key={index}
         option={option}
         artist={artist}
+        userId={this.props.userId}
         vote={this.props.vote}
         rating={artist.votes[option] || 0}
       />
@@ -54,6 +55,7 @@ class Artist extends Component<Prop> {
 const mapStateToProps = state => ({
   voteOptions: state.artistsReducer.voteoptions,
   artists: state.artistsReducer.artists,
+  userId: state.userReducer.user.id,
 });
 
 const mapDispatchToProps = dispatch => {

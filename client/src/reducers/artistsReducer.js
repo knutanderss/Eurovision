@@ -25,6 +25,7 @@ export default (state = initialState, action) => {
     case Action.USER_VOTED:
       const country = action.payload.country;
       const option = action.payload.option;
+      console.log (country);
       const artist = {
         ...state.artists[country],
         votes: {

@@ -55,21 +55,9 @@ export function requestVoteOptions () {
   };
 }
 
-export function vote2 () {
+export const vote = (userId, artist, option, rating) => {
   return dispatch => {
-    fetch (SERVER_URL + '/vote', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify ({}),
-    });
-  };
-}
-
-export const vote = (artist, option, rating) => {
-  return dispatch => {
+    // Directly dispatch for quick user experience
     dispatch ({
       type: Action.USER_VOTED,
       payload: {
@@ -77,6 +65,21 @@ export const vote = (artist, option, rating) => {
         option: option,
         vote: rating,
       },
+    });
+
+    // Forward vote to server
+    fetch (SERVER_URL + '/vote', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify ({
+        user: userId,
+        country: artist.country,
+        option,
+        rating,
+      }),
     });
   };
 };

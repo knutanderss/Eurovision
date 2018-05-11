@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import style from './style';
-import SVGImage from 'react-native-svg-image';
 import * as flags from '../../../assets/flag';
 
 const getFlag = abbr => {
@@ -9,7 +8,6 @@ const getFlag = abbr => {
 };
 
 export default props => {
-  console.log (props.artist.abbr);
   const flag = flags[props.artist.abbr];
 
   let info = props.artist.name + ' - ' + props.artist.song;

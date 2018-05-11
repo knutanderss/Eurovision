@@ -15,7 +15,8 @@ export default props => {
         maxStars={5}
         rating={props.rating}
         halfStarEnabled={true}
-        selectedStar={rating => props.vote (props.artist, props.option, rating)}
+        selectedStar={rating =>
+          props.vote (props.userId, props.artist, props.option, rating)}
         fullStarColor={'yellow'}
       />
     </View>
