@@ -13,6 +13,15 @@ export default StyleSheet.create ({
     marginRight: 10,
     padding: 5,
   },
+  artistInfo: {
+    flexDirection: 'row',
+    flex: 2,
+  },
+  artistState: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    flex: 1,
+  },
   flag: {
     marginRight: 10,
     borderRadius: 3,
@@ -30,5 +39,15 @@ export default StyleSheet.create ({
   },
   artist: {
     color: '#FFFFFFAA',
+  },
+  checkBox: {
+    marginRight: 10,
+  },
+  score: {
+    marginRight: 15,
+    fontSize: 20,
+    color: '#FFF',
+    fontFamily: TITLE_FONT,
+    fontWeight: 'bold',
   },
 });
