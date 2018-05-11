@@ -49,7 +49,8 @@ export default StyleSheet.create({
         width: 32,
         height: 32,
         backgroundColor: "#F03278",
-        borderRadius: 16
+        borderRadius: 16,
+        marginLeft: 16
     },
     totalScore: {
         fontFamily: "Avenir",

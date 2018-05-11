@@ -33,7 +33,10 @@ export default props => {
                     </Text>
                     {props.isDone ? (
                         <View style={style.done}>
-                            <Image source={done} />
+                            <Image
+                                style={{ width: 32, height: 32 }}
+                                source={done}
+                            />
                         </View>
                     ) : (
                         <View />
