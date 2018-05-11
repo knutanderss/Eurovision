@@ -3,6 +3,7 @@ import {View, Text} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import style from './style';
 import {COLOR_SCALE} from '../../../assets/constants';
+import {star, starfull, starhalf} from '../../../assets/icons';
 
 export default props => {
   return (
@@ -11,10 +12,9 @@ export default props => {
         {props.option}
       </Text>
       <StarRating
-        emptyStar={'md-star-outline'}
-        fullStar={'md-star'}
-        halfStar={'md-star-half'}
-        iconSet={'Ionicons'}
+        emptyStar={require ('../../../assets/icons/star.png')}
+        fullStar={require ('../../../assets/icons/starfull.png')}
+        halfStar={require ('../../../assets/icons/starhalf.png')}
         maxStars={5}
         rating={props.rating}
         halfStarEnabled={true}

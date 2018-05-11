@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import style from './style';
 import * as flags from '../../../assets/flag';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import TextTicker from 'react-native-text-ticker';
+import {done} from '../../../assets/icons';
 
 export default props => {
   const flag = flags[props.artist.abbr];
@@ -27,14 +27,7 @@ export default props => {
           <Text style={style.totalScore}>
             {props.artist.totalScore ? props.artist.totalScore : 0}
           </Text>
-          {props.isDone
-            ? <Ionicons
-                style={style.checkBox}
-                name="ios-checkmark"
-                size={40}
-                color="white"
-              />
-            : <View />}
+          {props.isDone ? <Image source={done} /> : <View />}
         </View>
       </View>
     </TouchableOpacity>

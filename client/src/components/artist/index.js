@@ -2,11 +2,19 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {View, Text, ScrollView, Button, StatusBar} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Button,
+  StatusBar,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import Country from './Country';
 import VoteOption from './VoteOption';
 import style from './style';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {back} from '../../assets/icons';
 import * as Action from '../../actions';
 
 class Artist extends Component<Prop> {
@@ -29,14 +37,13 @@ class Artist extends Component<Prop> {
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
         <View style={style.topView}>
-          <Icon.Button
-            style={style.backButton}
-            name="ios-arrow-back"
-            size={60}
+          <TouchableOpacity
             onPress={() => {
               this.props.navigation.goBack ();
             }}
-          />
+          >
+            <Image source={back} />
+          </TouchableOpacity>
           <Country
             country={artist.country}
             song={artist.song}
