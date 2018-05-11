@@ -9,7 +9,10 @@ export default props => {
     return (
         <View style={style.container}>
             <View>
-                <Text style={style.country}>{props.country}</Text>
+                <View>
+                    <Image source={flags[props.abbr]} style={style.flag} />
+                    <Text style={style.country}>{props.country}</Text>
+                </View>
                 <View style={style.ticker}>
                     <TextTicker
                         style={style.artist}
@@ -22,10 +25,6 @@ export default props => {
                         {info}
                     </TextTicker>
                 </View>
-            </View>
-
-            <View>
-                <Image source={flags[props.abbr]} style={style.flag} />
             </View>
         </View>
     )

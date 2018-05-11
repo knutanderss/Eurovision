@@ -5,14 +5,15 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         alignItems: "center",
         paddingHorizontal: 32,
-        marginBottom: 16
+        marginBottom: 24
     },
     flag: {
-        height: 48,
-        width: 48
+        height: 40,
+        width: 60,
+        marginBottom: 16
     },
     country: {
         fontFamily: "Avenir",
@@ -30,7 +31,6 @@ export default StyleSheet.create({
         color: "#888"
     },
     ticker: {
-        height: 20,
         width: "100%"
     }
 })

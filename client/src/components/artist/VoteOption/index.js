@@ -9,7 +9,7 @@ export default props => {
     return (
         <View style={style.container}>
             <Text style={style.voteText}>{props.option}</Text>
-            <View style={{ width: 100 }}>
+            <View>
                 <StarRating
                     emptyStar={require("../../../assets/icons/star.png")}
                     fullStar={require("../../../assets/icons/starfull.png")}

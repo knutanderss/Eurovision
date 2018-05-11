@@ -6,14 +6,16 @@ const ios = Platform.OS === "ios"
 export default StyleSheet.create({
     container: {
         paddingHorizontal: 32,
-        paddingVertical: 16
+        paddingVertical: 12,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     },
     voteText: {
         fontFamily: "Avenir",
         color: "#000",
         fontSize: 16,
         lineHeight: 24,
-        fontWeight: "800",
-        marginBottom: 4
+        fontWeight: "800"
     }
 })
