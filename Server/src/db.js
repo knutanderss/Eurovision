@@ -1,88 +1,85 @@
-const mongojs = require('mongojs')
-const db_username = process.env.DB_USERNAME
-const db_password = process.env.DB_PASSWORD
-const db_uri = `mongodb://${db_username}:${db_password}@eurovision-shard-00-00-lfpzu.mongodb.net:27017,eurovision-shard-00-01-lfpzu.mongodb.net:27017,eurovision-shard-00-02-lfpzu.mongodb.net:27017/test?ssl=true&replicaSet=Eurovision-shard-0&authSource=admin`
-const artists_collection = 'artists'
-const voteoptions_collection = 'voteoptions'
-const users_collection = 'users'
-const db = mongojs(db_uri, [artists_collection, voteoptions_collection, users_collection])
+const {db, find, insert, update} = require('./mongoLib')
 const fetch = require('node-fetch')
 
 const getArtists = () => {
-  return new Promise((resolve, reject) => {
-    db
-      .artists
-      .find((err, docs) => {
-        if (err) 
-          reject(err)
-        else 
-          resolve(docs)
-      })
-  })
+  return find(db.artists, {});
 }
 
 const getVoteOptions = () => {
-  return new Promise((resolve, reject) => {
-    db
-      .voteoptions
-      .find((err, docs) => {
-        if (err) 
-          reject(err)
-        else 
-          resolve(docs)
-      });
+  return find(db.voteoptions, {});
+}
+
+const addUserIfNotExists = (user) => {
+  return find(db.users, {'id': user}).then(result => {
+    return new Promise((resolve, reject) => {
+      if (result.length === 0) {
+        return insert(db.users, {
+            'id': user,
+            'countries': []
+        })
+          .then(result => resolve(result))
+          .catch(err => reject(err));
+      } else {
+        resolve();
+      }
+    });
+  });
+};
+
+const countryIsInList = (country, list) => {
+  return list
+    .filter(v => v && v.id && v.id === country)
+    .length > 0
+}
+
+const addCountryIfNotExists = (user, country) => {
+  // TODO: add countries.id here as well, and remove countryIsInList
+  return find(db.users, {id: user}).then(result => {
+    return new Promise((resolve, reject) => {
+      if (!countryIsInList(country, result[0].countries)) {
+        update(db.users, {
+          id: user
+        }, {
+          '$push': {
+            'countries': {
+              'id': country
+            }
+          }
+        }, {})
+          .then(result => resolve(result))
+          .catch(err => reject(err));
+      }
+    });
   });
 }
 
-const deleteArtist = name => {
+const updateOption = (user, country, option, rating) => {
   return new Promise((resolve, reject) => {
-    db
-      .artists
-      .remove({
-        name
-      }, err => {
-        if (err) 
-          reject(err)
-        else 
-          resolve()
-      })
-  })
-}
-
-const putArtist = artist => {
-  return new Promise((resolve, reject) => {
-    db
-      .artists
-      .insert(artist, err => {
-        if (err) 
-          reject(err)
-        else 
-          resolve()
-      })
-  })
+    let setQuery = {};
+    setQuery['countries.$.' + option] = rating;
+    setTimeout(() => {
+      console.log("doing the next update");
+      update(db.users, {
+        'id': user,
+        'countries.id': country
+      }, {
+        '$set': setQuery
+      }, {})
+        .then(result => resolve(result))
+        .catch(err => reject(err));
+    }, 5000);
+    // TODO: FIX!
+  });
 }
 
 const vote = info => {
-  return new Promise((resolve, reject) => {
-    votes = {};
-    votes[info.country] = {};
-    votes[info.country][info.option] = info.rating;
-    db
-      .users
-      .update({
-        userId: info.user
-      }, {
-        $set: {
-          votes
-        }
-      }, {upsert: true});
-  });
+  return addUserIfNotExists(info.user)
+    .then(addCountryIfNotExists(info.user, info.country))
+    .then(updateOption(info.user, info.country, info.option, info.rating))
 }
 
 module.exports = {
   getArtists,
-  deleteArtist,
-  putArtist,
   getVoteOptions,
   vote
 }
