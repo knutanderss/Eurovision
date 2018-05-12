@@ -19,5 +19,5 @@ module.exports = (app) => {
       .getWss()
       .clients
       .forEach(sendArtistsVotesToClient);
-  }, 10 * 1000);
+  }, 2 * 1000);
 }
