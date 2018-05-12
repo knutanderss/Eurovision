@@ -54,6 +54,7 @@ const addCountryIfNotExists = (user, country) => {
 }
 
 const updateOption = (user, country, option, rating) => {
+  // Todo: Should maybe not return?
   return new Promise((resolve, reject) => {
     let setQuery = {};
     setQuery['countries.$.' + option] = rating;
@@ -78,8 +79,40 @@ const vote = info => {
     .then(updateOption(info.user, info.country, info.option, info.rating))
 }
 
+const countPointsForArtists = users => {
+  countriesPoints = {}
+  users.forEach(user => {
+    if (!user.countries) {
+      return;
+    }
+    user
+      .countries
+      .forEach(country => {
+        console.log(country);
+        if (!(country.id in countriesPoints)) {
+          countriesPoints[country.id] = 0
+        }
+        for (key of Object.keys(country).filter(k => k !== 'id')) {
+          countriesPoints[country.id] += Math.max(country[key], 10);
+        }
+      });
+  })
+  return countriesPoints;
+}
+
+// TODO
+const fetchArtistsVotes = () => {
+  return new Promise((resolve, reject) => {
+    find(db.users).then(users => {
+      countriesPoints = countPointsForArtists(users);
+      resolve(countriesPoints);
+    }).catch(reject);
+  })
+}
+
 module.exports = {
   getArtists,
   getVoteOptions,
-  vote
+  vote,
+  fetchArtistsVotes
 }
