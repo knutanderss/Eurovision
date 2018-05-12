@@ -1,26 +1,28 @@
-import {StyleSheet, Platform} from 'react-native';
-import {TITLE_FONT} from '../../../assets/constants';
+import { StyleSheet, Platform } from "react-native"
+import { TITLE_FONT } from "../../../assets/constants"
 
-const ios = Platform.OS === 'ios';
+const ios = Platform.OS === "ios"
 
-export default StyleSheet.create ({
-  container: {
-    flexDirection: 'row',
-    padding: 15,
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-    justifyContent: 'center',
-  },
-  name: {
-    color: 'white',
-    fontSize: 25,
-    fontFamily: TITLE_FONT,
-    marginTop: 3,
-  },
-  picture: {
-    height: 40,
-    borderRadius: 20,
-    width: 40,
-    marginRight: 10,
-  },
-});
+export default StyleSheet.create({
+    container: {
+        flexDirection: "row",
+        paddingTop: 40,
+        paddingBottom: 24,
+        paddingHorizontal: 32,
+        backgroundColor: "#F03278",
+        justifyContent: "flex-start",
+        alignItems: "center"
+    },
+    name: {
+        color: "#fff",
+        fontSize: 20,
+        fontFamily: "Avenir",
+        fontWeight: "800"
+    },
+    picture: {
+        height: 48,
+        width: 48,
+        borderRadius: 24,
+        marginRight: 16
+    }
+})

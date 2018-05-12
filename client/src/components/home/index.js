@@ -19,14 +19,21 @@ class Home extends Component<Prop> {
     const artist = this.props.artists[item];
     const isDone =
       Object.keys (artist.votes).length === this.props.voteOptions.length;
+    let tapped = false;
     return (
       <ArtistCard
         artist={artist}
         isDone={isDone}
-        onPress={() =>
+        onPress={() => {
+          if (tapped) return;
+          tapped = true;
           this.props.navigation.navigate ('Artist', {
             country: artist.country,
-          })}
+          });
+          setTimeout (() => {
+            tapped = false;
+          }, 500);
+        }}
       />
     );
   };
@@ -41,6 +48,9 @@ class Home extends Component<Prop> {
               data={Object.keys (this.props.artists)}
               keyExtractor={(item, index) => item}
               renderItem={this.createArtistCard}
+              contentContainerStyle={{
+                paddingVertical: 16,
+              }}
             />
           : <Loader />}
       </View>

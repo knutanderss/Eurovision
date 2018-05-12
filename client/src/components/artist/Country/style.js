@@ -1,28 +1,36 @@
-import {StyleSheet} from 'react-native';
-import {TITLE_FONT} from '../../../assets/constants';
+import { StyleSheet } from "react-native"
+import { TITLE_FONT } from "../../../assets/constants"
 
-export default StyleSheet.create ({
-  container: {
-    flexDirection: 'row',
-    padding: 15,
-    justifyContent: 'center',
-  },
-  flag: {
-    height: 40,
-    width: 60,
-    marginRight: 10,
-  },
-  country: {
-    fontFamily: TITLE_FONT,
-    fontSize: 20,
-    color: 'white',
-  },
-  artist: {
-    marginTop: -3,
-    color: 'white',
-  },
-  ticker: {
-    height: 20,
-    width: 200,
-  },
-});
+export default StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        paddingHorizontal: 32,
+        marginBottom: 24
+    },
+    flag: {
+        height: 40,
+        width: 60,
+        marginBottom: 16
+    },
+    country: {
+        fontFamily: "Avenir",
+        fontSize: 32,
+        lineHeight: 40,
+        fontWeight: "900",
+        color: "#000",
+        marginBottom: 8
+    },
+    artist: {
+        fontFamily: "Avenir",
+        fontWeight: "600",
+        lineHeight: 20,
+        fontSize: 16,
+        color: "#888"
+    },
+    ticker: {
+        width: "100%"
+    }
+})

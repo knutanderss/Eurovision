@@ -49,7 +49,7 @@ class App extends Component {
             src={"https://lipis.github.io/flag-icon-css/flags/4x3/" + artist.abbr + ".svg"}
             alt="flag"/>
           <p className="artist-name">{(i + 1) + '. ' + artist.country}</p>
-          <p className="song-name">{artist.name + " - " + artist.song}</p>
+          <p className="song-name">{artist.song}</p>
           <p className="score">{artist.score || 0}</p>
         </div>
       ))

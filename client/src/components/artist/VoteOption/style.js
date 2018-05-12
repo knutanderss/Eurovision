@@ -1,23 +1,21 @@
-import {StyleSheet, Platform} from 'react-native';
-import {TITLE_FONT} from '../../../assets/constants';
+import { StyleSheet, Platform } from "react-native"
+import { TITLE_FONT } from "../../../assets/constants"
 
-const ios = Platform.OS === 'ios';
+const ios = Platform.OS === "ios"
 
-export default StyleSheet.create ({
-  container: {
-    marginLeft: 70,
-    marginRight: 70,
-    marginBottom: 15,
-
-    padding: 15,
-    borderBottomColor: 'white',
-    borderBottomWidth: 1,
-  },
-  voteText: {
-    fontFamily: TITLE_FONT,
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontSize: 20,
-    paddingBottom: 5,
-  },
-});
+export default StyleSheet.create({
+    container: {
+        paddingHorizontal: 32,
+        paddingVertical: 12,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
+    voteText: {
+        fontFamily: "Avenir",
+        color: "#000",
+        fontSize: 16,
+        lineHeight: 24,
+        fontWeight: "800"
+    }
+})

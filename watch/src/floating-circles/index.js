@@ -14,17 +14,6 @@ class FloatingCircles extends Component {
     }
   }
 
-  componentDidMount() {
-    let circles = []
-    for (let i=0; i<400; i++) {
-      const x = random({start: 0, end: 100})
-      const y = random({start: 0, end: 100})
-      const r = random({start: 10, end: 100})
-      circles.push(<circle key={i} cx={x + '%'} cy={y + '%'} r={r} fill="rgba(255, 255, 255, 0.04)"></circle>)
-    }
-    this.setState({circles})
-  }
-
   render() {
     return (
       /*
