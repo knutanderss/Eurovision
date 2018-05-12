@@ -92,7 +92,7 @@ const countPointsForArtists = users => {
           countriesPoints[country.id] = 0
         }
         for (key of Object.keys(country).filter(k => k !== 'id')) {
-          countriesPoints[country.id] += Math.max(country[key], 10);
+          countriesPoints[country.id] += Math.min(country[key], 10);
         }
       });
   })
@@ -115,3 +115,266 @@ module.exports = {
   vote,
   fetchArtistsVotes
 }
+
+const artists = [
+  {
+    "draw": 1,
+    "country": "Ukraina",
+    "name": "Mélovin",
+    "song": "«Under the Ladder»",
+    "norskOversettelse": "Under stigen",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 2,
+    "country": "Spania",
+    "name": "Alfred og Amaia",
+    "song": "«Tu canción»",
+    "norskOversettelse": "Din sang",
+    "language": "Spansk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 3,
+    "country": "Slovenia",
+    "name": "Lea Sirk",
+    "song": "«Hvala, ne!»",
+    "norskOversettelse": "Takk, nei!",
+    "language": "Slovensk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 4,
+    "country": "Litauen",
+    "name": "Ieva Zasimauskaitė",
+    "song": "«When We're Old»",
+    "norskOversettelse": "Når vi blir gamle",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 5,
+    "country": "Østerrike",
+    "name": "Cesár Sampson",
+    "song": "«Nobody but You»",
+    "norskOversettelse": "Ingen andre enn deg",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 6,
+    "country": "Estland",
+    "name": "Elina Netsjajeva",
+    "song": "«La forza»",
+    "norskOversettelse": "Kraften",
+    "language": "Italiensk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 7,
+    "country": "Norge",
+    "name": "Alexander Rybak",
+    "song": "«That's How You Write a Song»",
+    "norskOversettelse": "Det er sånn du skriver en sang",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 8,
+    "country": "Portugal",
+    "name": "Cláudia Pascoal",
+    "song": "«O jardim»",
+    "norskOversettelse": "Hagen",
+    "language": "Portugisisk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 9,
+    "country": "Storbritannia",
+    "name": "SuRie",
+    "song": "«Storm»",
+    "norskOversettelse": "Storm",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 10,
+    "country": "Serbia",
+    "name": "Sanja Ilić og Balkanika",
+    "song": "«Nova deca» (Нова деца)",
+    "norskOversettelse": "Nye barn",
+    "language": "Serbisk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 11,
+    "country": "Tyskland",
+    "name": "Michael Schulte",
+    "song": "«You Let Me Walk Alone»",
+    "norskOversettelse": "Du lot meg gå alene",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 12,
+    "country": "Albania",
+    "name": "Eugent Bushpepa",
+    "song": "«Mall»",
+    "norskOversettelse": "Lengsel",
+    "language": "Albansk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 13,
+    "country": "Frankrike",
+    "name": "Madame Monsieur",
+    "song": "«Mercy»",
+    "norskOversettelse": "– (refererer til en person)",
+    "language": "Fransk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 14,
+    "country": "Tsjekkia",
+    "name": "Mikolas Josef",
+    "song": "«Lie to Me»",
+    "norskOversettelse": "Lyv til meg",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 15,
+    "country": "Danmark",
+    "name": "Rasmussen",
+    "song": "«Higher Ground»",
+    "norskOversettelse": "Høyere grunn",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 16,
+    "country": "Australia",
+    "name": "Jessica Mauboy",
+    "song": "«We Got Love»",
+    "norskOversettelse": "Vi har kjærlighet",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 17,
+    "country": "Finland",
+    "name": "Saara Aalto",
+    "song": "«Monsters»",
+    "norskOversettelse": "Monstre",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 18,
+    "country": "Bulgaria",
+    "name": "Equinox",
+    "song": "«Bones»",
+    "norskOversettelse": "Bein",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 19,
+    "country": "Moldova",
+    "name": "DoReDoS",
+    "song": "«My Lucky Day»",
+    "norskOversettelse": "Min lykkedag",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 20,
+    "country": "Sverige",
+    "name": "Benjamin Ingrosso",
+    "song": "«Dance You Off»",
+    "norskOversettelse": "Danse deg bort",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 21,
+    "country": "Ungarn",
+    "name": "AWS",
+    "song": "«Viszlát nyár»",
+    "norskOversettelse": "Farvel, sommer",
+    "language": "Ungarsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 22,
+    "country": "Israel",
+    "name": "Netta",
+    "song": "«Toy»",
+    "norskOversettelse": "Leketøy",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 23,
+    "country": "Nederland",
+    "name": "Waylon",
+    "song": "«Outlaw in 'Em»",
+    "norskOversettelse": "Lovløst i seg",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 24,
+    "country": "Irland",
+    "name": "Ryan O'Shaughnessy",
+    "song": "«Together»",
+    "norskOversettelse": "Sammen",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 25,
+    "country": "Kypros",
+    "name": "Eleni Foureira",
+    "song": "«Fuego»",
+    "norskOversettelse": "Ild",
+    "language": "Engelsk",
+    "Plass": "",
+    "Poeng": ""
+  }, {
+    "draw": 26,
+    "country": "Italia",
+    "name": "Ermal Meta og Fabrizio Moro",
+    "song": "«Non mi avete fatto niente»",
+    "norskOversettelse": "Dere gjorde meg ingenting",
+    "language": "Italiensk",
+    "Plass": "",
+    "Poeng": ""
+  }
+]
+
+/*
+artists.forEach(artist => {
+  insert(db.artists, {
+    draw: artist.draw,
+    country: artist.country,
+    name: artist.name,
+    song: artist.song
+  });
+})*/
+/*
+find(db.artists).then(artists => {
+  artists.forEach(artist => {
+    if (artist.abbr) {
+      update(db.artists, {
+        song: artist.song
+      }, {
+        '$set': {
+          abbr: artist.abbr
+        }
+      }, {multi: true});
+    }
+  })
+});
+*/
