@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import "./style.css";
-import random from 'node-random-number'
 import Particles from 'react-particles-js'
 import particlesjsConfig from './particlesjs-config'
 

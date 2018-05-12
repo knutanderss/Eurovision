@@ -16,7 +16,9 @@ class Home extends Component<Prop> {
   }
 
   createArtistCard = ({item}) => {
+    console.log (item);
     const artist = this.props.artists[item];
+    console.log (artist);
     const isDone =
       Object.keys (artist.votes).length === this.props.voteOptions.length;
     let tapped = false;
@@ -39,13 +41,17 @@ class Home extends Component<Prop> {
   };
 
   render () {
+    const sortedArtists = Object.keys (this.props.artists).sort (
+      (x, y) => this.props.artists[x].draw - this.props.artists[y].draw
+    );
+
     return (
       <View style={style.container}>
         <StatusBar style={style.statusBar} barStyle="light-content" />
         <Profile user={this.props.user} />
         {this.props.artists && this.props.voteOptions
           ? <FlatList
-              data={Object.keys (this.props.artists)}
+              data={sortedArtists}
               keyExtractor={(item, index) => item}
               renderItem={this.createArtistCard}
               contentContainerStyle={{

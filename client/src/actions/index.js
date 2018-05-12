@@ -74,7 +74,7 @@ export const vote = (userId, artist, option, rating, difference) => {
         user: userId,
         country: artist.country,
         option,
-        rating,
+        rating: rating * 2,
       }),
     });
   };

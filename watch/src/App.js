@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import FloatingCircles from './floating-circles'
 import Fullscreen from "react-fullscreen-crossbrowser";
+import WebSocket from "react-websocket";
+import FlipMove from 'react-flip-move';
 
 class App extends Component {
 
@@ -10,16 +12,33 @@ class App extends Component {
 
     this.state = {
       isFull: false,
-      artists: []
+      artists: [],
+      endpoint: "http://localhost:3000/watch" //CHANGE
     };
   }
 
   _handleKeyDown(event) {
     if (event.key === 'f') {
       this.setState({
-        isFull: !this.state.isFull
+        ...this.state,
+        isFull: !this.state.isFull,
       })
     }
+  }
+
+  updateScore(data) {
+    data = JSON.parse(data);
+    const oldArtists = this.state.artists;
+    const artists = oldArtists.map(artist => {
+      artist.score = data[artist.country] || 0;
+      return artist;
+    });
+    artists.sort((a, b) => b.score - a.score);
+    this.setState({
+      ...this.state,
+      artists
+    }); 
+    console.log(this.state.artists);
   }
 
   componentWillMount() {
@@ -50,7 +69,7 @@ class App extends Component {
             alt="flag"/>
           <p className="artist-name">{(i + 1) + '. ' + artist.country}</p>
           <p className="song-name">{artist.song}</p>
-          <p className="score">{artist.score || 0}</p>
+          <p className="score">{ artist.score || 0}</p>
         </div>
       ))
 
@@ -61,13 +80,14 @@ class App extends Component {
         onChange={isFull => this.setState({isFull})}
         onClick={this.goFull}
         onKeyDown={this.add}>
+        <WebSocket url='ws://localhost:3000/watch' onMessage={this.updateScore.bind(this)}></WebSocket>
         <FloatingCircles onClick={this.goFull}/>
         <header onKeyDown={this.add}>
           <h1 onClick={this.goFull}>Eurovision Scoreboard</h1>
         </header>
-        <div className="artist-list">
+        <FlipMove duration={1500} esaing="ease-out" className="artist-list">
           {artistList}
-        </div>
+        </FlipMove>
       </Fullscreen>
     );
   }
