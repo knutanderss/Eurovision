@@ -8,30 +8,42 @@ import {done} from '../../../assets/icons';
 export default props => {
   const flag = flags[props.artist.abbr];
   let info = props.artist.song;
-  info = info.length > 29 ? info.slice (0, 29) + '...' : info;
+  const maxChars = 20;
+  info = info.length > maxChars
+    ? info.slice(0, maxChars) + '...'
+    : info;
   return (
     <TouchableOpacity onPress={props.onPress}>
       <View style={style.container}>
         <View style={style.artistInfo}>
           <View style={style.info}>
-            <Image style={style.flag} source={flag} resizeMode="cover" />
+            <Image style={style.flag} source={flag} resizeMode="cover"/>
           </View>
           <View>
             <Text style={style.country}>
               {props.artist.country}
             </Text>
-            <Text style={style.artist}>{info}</Text>
+            <Text style={style.artist}>
+              {info}
+            </Text>
           </View>
         </View>
         <View style={style.artistState}>
           <Text style={style.totalScore}>
-            {props.artist.totalScore ? props.artist.totalScore : 0}
+            {props.artist.totalScore
+              ? props.artist.totalScore
+              : 0}
           </Text>
           {props.isDone
             ? <View style={style.done}>
-                <Image style={{width: 32, height: 32}} source={done} />
+                <Image
+                  style={{
+                  width: 32,
+                  height: 32
+                }}
+                  source={done}/>
               </View>
-            : <View />}
+            : <View/>}
         </View>
       </View>
     </TouchableOpacity>
