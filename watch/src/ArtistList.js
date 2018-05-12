@@ -25,7 +25,6 @@ updateScore(data) {
       ...this.state,
       artists
     }); 
-    console.log(this.state.artists);
   }
   
   componentDidMount() {
