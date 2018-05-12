@@ -40,7 +40,6 @@ export default (state = initialState, action) => {
         ...state.artists,
       };
       artists[country] = artist;
-      console.log (artist);
       return {
         ...state,
         artists,
