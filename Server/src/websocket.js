@@ -11,11 +11,13 @@ module.exports = (app) => {
 
   app.ws('/watch', function (ws, req) {
     console.log('Another watcher just connected, total: ', wsInstance.getWss().clients.size)
-    setInterval(() => {
-      wsInstance
-        .getWss()
-        .clients
-        .forEach(sendArtistsVotesToClient);
-    }, 10 * 1000);
+    sendArtistsVotesToClient(ws);
   })
+
+  setInterval(() => {
+    wsInstance
+      .getWss()
+      .clients
+      .forEach(sendArtistsVotesToClient);
+  }, 10 * 1000);
 }

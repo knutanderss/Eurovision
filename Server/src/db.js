@@ -88,7 +88,6 @@ const countPointsForArtists = users => {
     user
       .countries
       .forEach(country => {
-        console.log(country);
         if (!(country.id in countriesPoints)) {
           countriesPoints[country.id] = 0
         }
