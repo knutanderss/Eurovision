@@ -18,6 +18,7 @@ const sendBackArtists = res => {
 
 module.exports = (app) => {
 
+  const appDir = __dirname + "../../../app_releases"
   const staticDir = __dirname + "../../../watch/build";
   app.use(express.static(staticDir))
 
@@ -49,6 +50,10 @@ module.exports = (app) => {
       .status(200)
       .send();
   })
+
+  app.get('/android', (req, res) => {
+    return res.download(path.join(appDir, 'app-release.apk'), 'app-release.apk');
+  });
 
   app.get('*', (req, res) => {
     return res.sendFile(path.join(staticDir, 'index.html'))
