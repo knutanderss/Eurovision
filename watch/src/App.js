@@ -13,8 +13,6 @@ class App extends Component {
 
     this.state = {
       isFull: false,
-      artists: [],
-      endpoint: "http://localhost:3000/watch" //CHANGE
     };
   }
 

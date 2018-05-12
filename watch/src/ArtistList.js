@@ -58,7 +58,7 @@ updateScore(data) {
 
     return (
         <div>
-        <WebSocket url='ws://localhost:3000/watch' onMessage={this.updateScore.bind(this)}></WebSocket>
+        <WebSocket url='ws://eurovisionapp.herokuapp.com/watch' onMessage={this.updateScore.bind(this)}></WebSocket>
         <FlipMove duration={1500} esaing="ease-out" className="artist-list">
           {artistList}
         </FlipMove>
