@@ -15,7 +15,7 @@
     "babel-preset-flow": "^6.23.0",
     "plist": "^3.0.1",
     "react": "16.3.1",
-    "react-native": "^0.52.0",
+    "react-native": "0.55.4",
     "react-native-fbsdk": "^0.7.0",
     "react-native-loader": "^1.2.1",
     "react-native-star-rating": "^1.0.9",
